@@ -1,0 +1,1810 @@
+{
+  "results": [
+    {
+      "id": "R1",
+      "code": "R1",
+      "title": "Net zero energy NREP Museum.",
+      "outcome": "Outcome 1: Increased adoption of renewable energy and efficiency investment.",
+      "order": 1,
+      "outputs": [
+        {
+          "id": "R1-O1.1",
+          "code": "1.1",
+          "title": "Advancement in clean cooking energy adoption",
+          "order": 1,
+          "targets": [
+            {
+              "id": "R1-T1.1.1",
+              "code": "1.1.1",
+              "description": "At least 6,000 electric pressure, solar and bio-ethanol cookers sold annually",
+              "timeline": "Short-term",
+              "leadOrg": "UNACC & WREAU",
+              "sectionSlug": "unacc-wreau",
+              "activities": "1.1.1.1.      Consumer Awareness and Behavior Change Campaigns 1.1.1.2.      Subsidies, Incentives, and Financing Options 1.1.1.3.      Strengthening Distribution and Last-Mile Supply Chains 1.1.1.4.      Capacity Building and Skills Development 1.1.1.5.      Policy Engagement and Institutional Support 1.1.1.6.      Research, Monitoring, and Impact Evaluation",
+              "weightTarget": 0.3,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R1-T1.1.2",
+              "code": "1.1.2",
+              "description": "At least 2 local production facilities clean cooking appliances (EPCs, Bio-ethanol cookers & Solar cookers)",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.1.2.1.      Establishment of Local Manufacturing and Assembly Units 1.1.2.2.      Capacity Building for Local Workforce and Technical Training 1.1.2.3.      Strengthening Supply Chains for Raw Materials and Components 1.1.2.4.      Policy Advocacy and Incentives for Local Manufacturing 1.1.2.5.      Market Development and Consumer Awareness Campaigns 1.1.2.6.      Research, Innovation, and Product Improvement",
+              "weightTarget": 0.5,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R1-O1.2",
+          "code": "1.2",
+          "title": "Upscaling of Productive Use of Energy (PUE)",
+          "order": 2,
+          "targets": [
+            {
+              "id": "R1-T1.2.1",
+              "code": "1.2.1",
+              "description": "At least 100 PUE investments established annually",
+              "timeline": "Medium-& Longterm",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.2.1.1.      Capacity Building and Skills Development for Entrepreneurs 1.2.1.2.      Access to Affordable Financing and Incentives 1.2.1.3.      Strengthening Market Linkages and Value Chains 1.2.1.4.      Infrastructure Development and Technology Deployment 1.2.1.5.      Policy Advocacy and Institutional Support 1.2.1.6.      Monitoring, Evaluation, and Impact Assessment",
+              "weightTarget": 1,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R1-O1.3",
+          "code": "1.3",
+          "title": "Rural electrification through Off-grid systems",
+          "order": 3,
+          "targets": [
+            {
+              "id": "R1-T1.3.1",
+              "code": "1.3.1",
+              "description": "At least 5 mini-grid clusters are licensed annually",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.3.1.1.      Policy and Regulatory Support for Mini-Grid Development 1.3.1.2.      Financial Mobilization and Investment Facilitation 1.3.1.3.      Site Identification and Feasibility Studies 1.3.1.4.      Deployment of Mini-Grids and Renewable Energy Technologies 1.3.1.5.      Capacity Building and Community Engagement 1.3.1.6.      Monitoring, Evaluation, and Impact Assessment",
+              "weightTarget": 0.2,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R1-T1.3.2",
+              "code": "1.3.2",
+              "description": "At least 5MW equivalent stand-alone solar home systems installed annually",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "USEA & UNREEA",
+              "sectionSlug": "usea-unreea",
+              "activities": "1.3.2.1.      Market Development and Consumer Awareness Campaigns 1.3.2.2.      Affordable Financing and Pay-As-You-Go (PAYGO) Models 1.3.2.3.      Strengthening Solar Supply Chains and Local Distribution Networks 1.3.2.4.      Technical Training and Workforce Development 1.3.2.5.      Policy Advocacy and Institutional Support 1.3.2.6.      Monitoring, Evaluation, and Data-Driven Scale-Up",
+              "weightTarget": 0.8,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R1-O1.4",
+          "code": "1.4",
+          "title": "Accelerated adoption of Net-metering Scheme",
+          "order": 4,
+          "targets": [
+            {
+              "id": "R1-T1.4.1",
+              "code": "1.4.1",
+              "description": "At least 4 Net- metering pilot projects established",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.4.1.1.      Policy and Regulatory Framework Development 1.4.1.2.      Implementation of Pilot Net-Metering Projects 1.4.1.3.      Consumer Awareness and Capacity Building 1.4.1.4.      Incentives and Financing Mechanisms 1.4.1.5.      Strengthening Grid Infrastructure and Smart Meter Deployment 1.4.1.6.      Monitoring, Evaluation, and Scaling Up",
+              "weightTarget": 0.5,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R1-T1.4.2",
+              "code": "1.4.2",
+              "description": "Comprehensive analysis of national grid infrastructure stability (for Net-metering, E-cooking & E-mobility)",
+              "timeline": "Short-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.4.2.1.      Grid Stability and Load Analysis Study 1.4.2.2.      Pilot Testing of Net-Metering with Grid Impact Assessments 1.4.2.3.      Smart Grid and Energy Storage Integration 1.4.2.4.      Policy and Regulatory Framework Enhancement 1.4.2.5.      Capacity Building and Stakeholder Engagement 1.4.2.6.      Data Collection, Monitoring, and Reporting",
+              "weightTarget": 0.25,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R1-T1.4.3",
+              "code": "1.4.3",
+              "description": "At least 50 Net-metering projects established annually",
+              "timeline": "Medium-term",
+              "leadOrg": "PSFU & UMA",
+              "sectionSlug": "psfu-uma",
+              "activities": "1.4.3.1.      Streamlining Policy and Regulatory Framework 1.4.3.2.      Financial Incentives and Investment Mobilization 1.4.3.3.      Capacity Building for Utilities and Installers 1.4.3.4.      Public Awareness and Consumer Engagement 1.4.3.5.      Infrastructure Development and Grid Readiness 1.4.3.6.      Monitoring, Evaluation, and Expansion Strategy",
+              "weightTarget": 0.25,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R1-O1.5",
+          "code": "1.5",
+          "title": "Production of biofuels for industrial scale utilization",
+          "order": 5,
+          "targets": [
+            {
+              "id": "R1-T1.5.1",
+              "code": "1.5.1",
+              "description": "At least 2 biofuel production facilities established annually",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.5.1.1.      Feasibility Studies and Site Selection for Biofuel Facilities 1.5.1.2.      Feedstock Development and Supply Chain Strengthening 1.5.1.3.      Technology Acquisition and Facility Construction 1.5.1.4.      Policy Advocacy and Regulatory Compliance 1.5.1.5.      Market Development and Industrial Adoption 1.5.1.6.      Research, Innovation, and Sustainability Monitoring",
+              "weightTarget": 0.5,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R1-T1.5.2",
+              "code": "1.5.2",
+              "description": "At least 10% of biofuel produced blended annually",
+              "timeline": "Medium-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.5.2.1.      Establishment of Biofuel Blending Regulations and Standards 1.5.2.2.      Development of Large-Scale Biofuel Production and Supply Chains 1.5.2.3.      Infrastructure Development for Blending and Distribution 1.5.2.4.      Financial Incentives and Investment Promotion 1.5.2.5.      Industry Engagement and Consumer Awareness 1.5.2.6.      Monitoring, Evaluation, and Policy Adjustments",
+              "weightTarget": 0.5,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R1-O1.6",
+          "code": "1.6",
+          "title": "Waste to Energy deployment",
+          "order": 6,
+          "targets": [
+            {
+              "id": "R1-T6.1.1",
+              "code": "6.1.1",
+              "description": "At least 2 landfills used for energy generation",
+              "timeline": "Medium-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.6.1.1.1    Feasibility Studies and Site Selection for Waste to Energy Projects 1.6.1.1.2.      Development of Waste Collection and Segregation Systems 1.6.1.1.3.      Construction and Commissioning of WtE Infrastructure 1.6.1.1.4.      Policy and Regulatory Framework Strengthening 1.6.1.1.5.      Community Awareness and Capacity Building 1.6.1.1.6.      Monitoring, Evaluation, and Technology Optimization",
+              "weightTarget": 0.1,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R1-T1.6.2",
+              "code": "1.6.2",
+              "description": "At least 1,500 domestic biogas systems installed annually",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "UNBA",
+              "sectionSlug": "unba",
+              "activities": "1.6.2.1.      Feasibility Studies and Site Assessments 1.6.2.2.      Promotion and Awareness Campaigns 1.6.2.3.      Capacity Building and Technical Training 1.6.2.4.      Financial Support and Incentives 1.6.2.5.      Installation and Quality Assurance 1.6.2.6.      Monitoring, Evaluation, and Policy Advocacy",
+              "weightTarget": 0.4,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R1-T1.6.3",
+              "code": "1.6.3",
+              "description": "At least 5 commercial and industrial waste to energy facilities installed annually",
+              "timeline": "Medium-& Longterm",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.6.3.1.      Feasibility Studies and Site Selection 1.6.3.2.      Development of Waste Collection and Processing Infrastructure 1.6.3.3.      Construction and Commissioning of WtE Facilities 1.6.3.4.      Policy and Regulatory Framework Enhancement 1.6.3.5.      Capacity Building and Stakeholder Engagement 1.6.3.6.      Monitoring, Evaluation, and Expansion Strategies",
+              "weightTarget": 0.6,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R1-O1.7",
+          "code": "1.7",
+          "title": "Deployment of nascent energy options",
+          "order": 7,
+          "targets": [
+            {
+              "id": "R1-T1.7.1",
+              "code": "1.7.1",
+              "description": "At least 2 floating solar systems installed",
+              "timeline": "Medium-& Longterm",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.7.1.1.      Feasibility Studies and Site Assessments 1.7.1.2.      Policy and Regulatory Framework Development 1.7.1.3.      Technology Procurement and Infrastructure Development 1.7.1.4.      Financing and Investment Mobilization 1.7.1.5.      Capacity Building and Community Engagement 1.7.1.6.      Monitoring, Evaluation, and Scale-Up Strategy",
+              "weightTarget": 0.1,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R1-T1.7.2",
+              "code": "1.7.2",
+              "description": "At least 1 facility for local production of green hydrogen",
+              "timeline": "Medium-& Longterm",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.7.2.1.      Feasibility Studies and Site Selection 1.7.2.2.      Policy and Regulatory Framework Development 1.7.2.3.      Technology Procurement and Infrastructure Development 1.7.2.4.      Financing and Investment Mobilization 1.7.2.5.      Capacity Building and Workforce Development 1.7.2.6.      Monitoring, Evaluation, and Scale-Up Strategy",
+              "weightTarget": 0.3,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R1-T1.7.3",
+              "code": "1.7.3",
+              "description": "At least 1 pilot utilization of geothermal energy",
+              "timeline": "Medium-& Longterm",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.7.3.1.      Feasibility Studies and Resource Mapping 1.7.3.2.      Policy and Regulatory Framework Development 1.7.3.3.      Technology Selection and Infrastructure Development 1.7.3.4.      Financing and Investment Mobilization 1.7.3.5.      Capacity Building and Stakeholder Engagement 1.7.3.6.      Monitoring, Evaluation, and Expansion Strategy",
+              "weightTarget": 0.5,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R1-T1.7.4",
+              "code": "1.7.4",
+              "description": "At least 1,000 units of E- and Hybrid-mobility added to the transport sector",
+              "timeline": "Medium-& Longterm",
+              "leadOrg": "MEMD & MoWT",
+              "sectionSlug": "memd-mowt",
+              "activities": "1.7.4.1.      Policy and Regulatory Framework Development 1.7.4.2.      Expansion of EV Charging and Battery Swapping Infrastructure 1.7.4.3.      Financial Incentives and Investment Mobilization 1.7.4.4.      Local Manufacturing and Assembly of E-Mobility Components 1.7.4.5.      Public Awareness and Capacity Building 1.7.4.6.      Monitoring, Evaluation, and Data-Driven Expansion",
+              "weightTarget": 0.1,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R1-O1.8",
+          "code": "1.8",
+          "title": "Adoption of energy conservation practices for the design, construction, and utilization of RE&EE facilities.",
+          "order": 8,
+          "targets": [
+            {
+              "id": "R1-T1.8.1",
+              "code": "1.8.1",
+              "description": "Incorporate RE&EE considerations in building, transport, and work safety codes",
+              "timeline": "Medium-term",
+              "leadOrg": "MoWT (for Transport & work safety) MoLHUD (for buildings)",
+              "sectionSlug": "mowt-for-transport-work-",
+              "activities": "1.8.1.1     Review and Update of Building, Transport, and Work Safety Codes 1.8.1.2.      Capacity Building and Training for Architects, Engineers, and Planners 1.8.1.3.      Incentivizing Compliance with RE & EE Standards 1.8.1.4.      Development and Enforcement of Transport Sector Energy Standards 1.8.1.5.      Public Awareness and Demonstration Projects 1.8.1.6.      Monitoring, Evaluation, and Strengthening of Compliance Mechanisms",
+              "weightTarget": 1,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R1-O1.9",
+          "code": "1.9",
+          "title": "Accelerated adoption of net-zero buildings in the country",
+          "order": 9,
+          "targets": [
+            {
+              "id": "R1-T1.9.1",
+              "code": "1.9.1",
+              "description": "At least 5 net-zero buildings constructed in the country",
+              "timeline": "Medium -& longterm",
+              "leadOrg": "MoLHUD",
+              "sectionSlug": "molhud",
+              "activities": "1.9.1.1.      Development and Implementation of National Net-Zero Building Standards 1.9.1.2.      Financial Incentives and Support Mechanisms 1.9.1.3.      Capacity Building and Training for Industry Stakeholders 1.9.1.4.      Public Awareness and Advocacy Campaigns 1.9.2.5.      Pilot Projects and Demonstration Buildings 1.9.1.6.      Monitoring, Evaluation, and Reporting",
+              "weightTarget": 0.5,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R1-T1.9.2",
+              "code": "1.9.2",
+              "description": "At least 6 benchmarking visits annually",
+              "timeline": "Long-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "1.9.2.1.      Organize Benchmarking Visits to Global Net-Zero Building Sites 1.9.2.2.      Create a Knowledge Exchange Program for Local Stakeholders 1.9.2.3.      Develop Local Net-Zero Building Demonstration Projects 1.9.2.4.      Conduct Annual Net-Zero Building Conference with Benchmarking Sessions 1.9.2.5.      Strengthen Collaboration with International Net-Zero Building Networks 1.9.2.6.      Establish a Feedback Loop for Benchmarking Insights and Local Adaptation",
+              "weightTarget": 0.5,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.4,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R2",
+      "code": "R2",
+      "title": "Knowledge Hub and robust information management system.",
+      "outcome": "Outcome 2: Enhanced recognition of NREP and utilization of RE&EE data and knowledge management system.",
+      "order": 2,
+      "outputs": [
+        {
+          "id": "R2-O2.1",
+          "code": "2.1",
+          "title": "Data management and consolidation",
+          "order": 1,
+          "targets": [
+            {
+              "id": "R2-T2.1.1",
+              "code": "2.1.1",
+              "description": "Development of a robust information management system for RE&EE sector",
+              "timeline": "Short-term",
+              "leadOrg": "CREEC",
+              "sectionSlug": "creec",
+              "activities": "2.1.1.1.      Establishment of a Centralized RE & EE Data Repository  2.1.1.2.      Implementation of Standardized Data Collection Protocols 2.1.1.3.      Integration of Real-Time Monitoring and Reporting Systems  2.1.1.4.      Development of Data Analytics and Decision-Support Tools 2.1.1.5.      Enhancement of Data Security and Accessibility Frameworks 2.1.1.6.      Capacity Building and Stakeholder Engagement on Data Utilization",
+              "weightTarget": 0.1,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R2-T2.1.2",
+              "code": "2.1.2",
+              "description": "Mandatory sharing of RE&EE sector data and information by stakeholders",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "2.1.2.1.      Development of a National RE & EE Data-Sharing Policy 2.1.2.2.      Creation of a Centralized RE & EE Data Exchange Platform 2.1.2.3.      Implementation of Standardized Reporting Formats and Protocols 2.1.2.4.      Mandatory Submission of Performance Data by RE & EE Project Developers 2.1.2.5.      Integration of RE & EE Data with National Energy Planning Systems  2.1.2.6.      Stakeholder Capacity Building on Data Sharing and Compliance",
+              "weightTarget": 0.9,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R2-O2.2",
+          "code": "2.2",
+          "title": "R&D enhancement to support the RE&EE sector",
+          "order": 2,
+          "targets": [
+            {
+              "id": "R2-T2.2.1",
+              "code": "2.2.1",
+              "description": "At least 20% increment in R&D related to RE&EE by tertiary institutions",
+              "timeline": "Short-term",
+              "leadOrg": "Academic Institutions",
+              "sectionSlug": "academic-institutions",
+              "activities": "2.2.1.1.      Increased Funding for RE & EE Research in Tertiary Institutions 2.2.1.2.      Development of Research Collaboration Networks 2.2.1.3.      Establishment of RE & EE Innovation Hubs and Laboratories 2.2.1.4.      Integration of RE & EE Research into Academic Curricula 2.2.1.5.      Implementation of Research Commercialization Programs 2.2.1.6.      Policy and Incentives for Industry-Academia R&D Linkages",
+              "weightTarget": 0.3,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R2-T2.2.2",
+              "code": "2.2.2",
+              "description": "At least 25% increment in the foreign investment in the RE&EE sector",
+              "timeline": "Medium-term",
+              "leadOrg": "UIA & MEMD",
+              "sectionSlug": "uia-memd",
+              "activities": "2.2.2.1.      Establishment of Specialized RE & EE Research and Innovation Centers 2.2.2.2.      Strengthening International Research Collaborations and Partnerships 2.2.2.3.      Development of Incentives for Foreign Investors in RE & EE R&D 2.2.2.4.      Hosting of RE & EE Investment and Innovation Summits 2.2.2.5.      Promotion of Technology Transfer and Localization of RE & EE Solutions 2.2.2.6.      Enhancing Policy and Regulatory Frameworks for RE & EE R&D Investment",
+              "weightTarget": 0.4,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R2-T2.2.3",
+              "code": "2.2.3",
+              "description": "At least 100 daily visits of the RE&EE information management system",
+              "timeline": "Short- & Medium-term",
+              "leadOrg": "CREEC",
+              "sectionSlug": "creec",
+              "activities": "2.2.3.1.      Development of a User-Friendly and Interactive RE & EE Information Management System 2.2.3.2.      Integration of AI-Driven Insights and Predictive Analytics 2.2.3.3.      Regular Uploading of High-Quality Research, Case Studies, and Policy Briefs  2.2.3.4.      Strategic Digital Marketing and Awareness Campaigns  2.2.3.5.      Partnerships with Universities, Think Tanks, and Industry Players 2.2.3.6.      Hosting of Webinars, Training Sessions, and Live Data Demonstrations",
+              "weightTarget": 0.3,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R2-O2.3",
+          "code": "2.3",
+          "title": "Donor investment in RE&EE data and information gathering",
+          "order": 3,
+          "targets": [
+            {
+              "id": "R2-T2.3.1",
+              "code": "2.3.1",
+              "description": "At least 1 annual RE&EE data and information collecting initiative",
+              "timeline": "Short-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "2.3.1.1.      Development of a Donor-Funded RE & EE Data Collection Program 2.3.1.2.      Creation of a Multi-Stakeholder RE & EE Data Consortium  2.3.1.3.      Implementation of National and Regional RE & EE Baseline Studies 2.3.1.4.      Deployment of Digital and Smart Monitoring Tools for Data Collection 2.3.1.5.      Organization of an Annual RE & EE Data Investment Conference 2.3.1.6.      Publication of an Annual RE & EE Data and Market Trends Report",
+              "weightTarget": 0.5,
+              "weightOutput": 0.6,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R2-T2.3.2",
+              "code": "2.3.2",
+              "description": "At least 2 data and information sharing events sponsored annually",
+              "timeline": "Short-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "2.3.2.1.      Establishment of a Donor-Funded RE & EE Data Sharing and Collaboration Platform 2.3.2.2.      Organization of Two Annual High-Level RE & EE Data Dissemination Forums 2.3.2.3.      Development of a Standardized RE & EE Data Collection and Reporting Framework 2.3.2.4.      Sponsorship of Research and Data-Driven Policy Dialogues  2.3.2.5.      Publication and Dissemination of Annual RE & EE Data Reports 2.3.2.6.      Engagement with Regional and International Partners for Cross-Border Data Exchange",
+              "weightTarget": 0.5,
+              "weightOutput": 0.6,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R3",
+      "code": "R3",
+      "title": "RE&EE Project Preparation Facility",
+      "outcome": "Outcome 3: RE&EE business start-up and entrepreneurship support",
+      "order": 3,
+      "outputs": [
+        {
+          "id": "R3-O3.1",
+          "code": "3.1",
+          "title": "Project preparation Technical Assistance (TA) to support companies to progress until achieving financial close",
+          "order": 1,
+          "targets": [
+            {
+              "id": "R3-T3.1.1",
+              "code": "3.1.1",
+              "description": "At least 10 RE&EE businesses are supported annually",
+              "timeline": "Short-& Mediumterm",
+              "leadOrg": "UECCC",
+              "sectionSlug": "ueccc",
+              "activities": "3.1.1.1.      Development of a Structured RE & EE Project Preparation Facility 3.1.1.2.      Provision of Financial Modeling and Business Plan Development  Support 3.1.1.3.      Capacity Building and Training on Investment Readiness 3.1.1.4.      Facilitation of Due Diligence and Risk Assessment Processes 3.1.1.5.      Matchmaking with Investors, Lenders, and Development Finance Institutions (DFIs) 3.1.1.6.      Technical Advisory on Regulatory Compliance and Permitting",
+              "weightTarget": 0.3,
+              "weightOutput": 0.4,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R3-T3.1.2",
+              "code": "3.1.2",
+              "description": "At least 2 existing businesses per year extend their portfolio to include sustainable energy",
+              "timeline": "Medium-& Long-term",
+              "leadOrg": "UNREEEA & members",
+              "sectionSlug": "unreeea-members",
+              "activities": "3.1.2.1.      Customized Business Advisory for Diversification into Sustainable Energy 3.1.2. 2.      Financial Structuring and Investment Readiness Support 3.1.2.3.      Market Research and Opportunity Mapping  3.1.2.4.      Regulatory and Policy Guidance for New Market Entry 3.1.2.5.      Access to Grant Funding and Blended Finance Mechanisms 3.1.2.6.      Facilitation of Strategic Partnerships and Technology Transfer",
+              "weightTarget": 0.7,
+              "weightOutput": 0.4,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R3-O3.2",
+          "code": "3.2",
+          "title": "Financial support in the Energy sector to increase RE&EE business opportunities for local companies and industry.",
+          "order": 2,
+          "targets": [
+            {
+              "id": "R3-T3.2.1",
+              "code": "3.2.1",
+              "description": "At least 10 million USD of new loans and co-financing grants to local SMEs and NGOs annually",
+              "timeline": "Medium-& Long-term",
+              "leadOrg": "Bank of Uganda",
+              "sectionSlug": "bank-of-uganda",
+              "activities": "3.2.1.2.      Capacity Building on Financial Management and Investment Readiness  3.2.1.3.      Development of Risk-Mitigation Instruments for RE & EE Investments \"3.2.1.4.      Facilitation of Public-Private Partnerships (PPPs) and  Co-Financing Opportunities 3.2.1.5.      Technical Assistance for Loan and Grant Application Processes 3.2.1.6.      Annual Renewable Energy Investment Forum and Matchmaking Events",
+              "weightTarget": 1,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R3-O3.3",
+          "code": "3.3",
+          "title": "Access to finance via different instruments, including connecting with existing financing facilities",
+          "order": 3,
+          "targets": [
+            {
+              "id": "R3-T3.3.1",
+              "code": "3.3.1",
+              "description": "At least 2 investment forums are conducted annually",
+              "timeline": "Short-term",
+              "leadOrg": "UECCC",
+              "sectionSlug": "ueccc",
+              "activities": "3.3.1.1.      Organization of Two Annual Renewable Energy & Energy Efficiency  (RE & EE) Investment Forums\" 3.3.1.2.      Development of a RE & EE Financing Directory and Matchmaking  Platform 3.3.1.3.      Facilitation of Business Pitching Sessions and Investor Roundtables  3.3.1.4.      Technical Assistance for Accessing Existing Financing Facilities  3.3.1.5.      Capacity Building on Financial Instruments and Investment Structuring  3.3.1.6.      Engagement with Local and International Financial Institutions",
+              "weightTarget": 0.2,
+              "weightOutput": 0.3,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R3-T3.3.2",
+              "code": "3.3.2",
+              "description": "At least 3 million USD lent to RE&EE sector local businesses",
+              "timeline": "Medium-& Long-term",
+              "leadOrg": "Bank of Uganda",
+              "sectionSlug": "bank-of-uganda",
+              "activities": "3.3.2.1.      Development of a RE & EE Business Loan Facility 3.3.2.2.      Partnerships with Existing Green Financing Programs  3.3.2.3.      Capacity Building on Loan Application and Investment Readiness 3.3.2.4.      Technical Assistance for Loan Structuring and Due Diligence 3.3.2.5.      Facilitation of Business-Investor Networking and Matchmaking Events 3.3.2.6.      Advocacy for Policy Incentives to Enhance RE & EE Financing",
+              "weightTarget": 0.2,
+              "weightOutput": 0.3,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R3-T3.3.3",
+              "code": "3.3.3",
+              "description": "Just and patient facilities with flexible ticket sizes established by financing institutions",
+              "timeline": "Short-& Medium term",
+              "leadOrg": "Uganda Bankers’ Association",
+              "sectionSlug": "uganda-bankers-associati",
+              "activities": "3.3.3.1.      Engagement with Financial Institutions to Design Flexible RE & EE  Financing Products 3.3.3.2.      Establishment of a Blended Finance Mechanism for RE & EE Projects 3.3.3.3.      Creation of a Green Credit Guarantee Fund  3.3.3.4.      Capacity Building for Financial Institutions on RE & EE Investment Risks  and Opportunities 3.3.3.5.      Facilitation of Public-Private Partnerships (PPPs) to Expand Patient  Capital Availability 3.3.3.6.      Advocacy for Regulatory and Policy Reforms to Support Just and Flexible Financing",
+              "weightTarget": 0.6,
+              "weightOutput": 0.3,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R3-O3.4",
+          "code": "3.4",
+          "title": "Support for improvement of the policy and regulatory frameworks and business enabling environment both at the regional and national levels.",
+          "order": 4,
+          "targets": [
+            {
+              "id": "R3-T3.4.1",
+              "code": "3.4.1",
+              "description": "At least 2 TAs conducted to support inputs from private sector associations to the policy and regulatory framework regarding the national sustainable energy business environment.",
+              "timeline": "Short-term",
+              "leadOrg": "UECCC",
+              "sectionSlug": "ueccc",
+              "activities": "3.4.1.1.      Organization of Stakeholder Consultations with Private Sector  Associations 3.4.1.2.      Technical Assistance for Policy Review and Recommendations 3.4.1.3.      Development of Policy Briefs and Position Papers  3.4.1.4.      Capacity Building for Private Sector Associations on Policy Advocacy 3.4.1.5.      Facilitation of Public-Private Partnerships (PPPs) for Policy Co-Creation  3.4.1.6.      Monitoring and Evaluation of Policy Implementation",
+              "weightTarget": 1,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R3-O3.5",
+          "code": "3.5",
+          "title": "Access to financing via different instruments facilitated",
+          "order": 5,
+          "targets": [
+            {
+              "id": "R3-T3.5.1",
+              "code": "3.5.1",
+              "description": "At least USD 10 million is available for RE&EE investment in the country",
+              "timeline": "Medium-term",
+              "leadOrg": "UECCC",
+              "sectionSlug": "ueccc",
+              "activities": "3.5.1.1.      Establishment of a Dedicated RE & EE Financing Facility 3.5.1.2.      Engagement with Local and International Investors to Mobilize Capital  3.5.1.3.      Creation of Blended Finance Mechanisms to De-Risk Investments 3.5.1.4.      Technical Assistance for SMEs and Project Developers on Investment  Readiness 3.5.1.5.      Advocacy for Policy Incentives to Encourage RE & EE Investment 3.5.1.6.      Development of a Green Finance and Investment Tracking Platform",
+              "weightTarget": 1,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.2,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R4",
+      "code": "R4",
+      "title": "Regional RE&EE Centers and Energy Modelling and Integration Virtual Laboratory",
+      "outcome": "Outcome 4: Development of domesticated RE&EE systems, research, piloting, and enhanced RE&EE modelling skills and knowledge",
+      "order": 4,
+      "outputs": [
+        {
+          "id": "R4-O4.1",
+          "code": "4.1",
+          "title": "Central sustainable e-mobility policy and regulatory framework",
+          "order": 1,
+          "targets": [
+            {
+              "id": "R4-T4.1.1",
+              "code": "4.1.1",
+              "description": "Government includes low carbon mobility / EV targets in their Energy/GHG targets",
+              "timeline": "Medium-term",
+              "leadOrg": "Science, Technology and Innovation (STI) Secretariat",
+              "sectionSlug": "sti-secretariat",
+              "activities": "4.1.1     Development of a National E-Mobility Policy and Regulatory Framework 4.1.2     Integration of E-Mobility Targets into National Energy and Climate Plans 4.1.3      Establishment of Incentives for EV Adoption and Infrastructure Development 4.1.4      Technical Assistance for Government Agencies on EV Policy Implementation  4.1.5      Stakeholder Engagement and Public Consultations on E-Mobility Regulations 4.1.6      Monitoring and Evaluation of E-Mobility Policy Impact",
+              "weightTarget": 0.5,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R4-T4.1.2",
+              "code": "4.1.2",
+              "description": "Government includes EE in transport and EV in their energy roadmaps, NDCs, and Low Emissions Development Strategies",
+              "timeline": "Medium-term",
+              "leadOrg": "STI Secretariat",
+              "sectionSlug": "sti-secretariat",
+              "activities": "4.1.2.1      Drafting and Adoption of a National E-Mobility and EE Transport Policy 4.1.2.2      Integration of EE Transport and EV Targets into National Energy and Climate Plans 4.1.2.3     Development of Incentive Programs for EV Adoption and EE Transport Solutions 4.1.2.4      Stakeholder Consultations and Public-Private Partnerships for Policy Alignment 4.1.2.5      Capacity Building and Technical Assistance for Policymakers and Regulators 4.1.2.6      Establishment of a National Monitoring and Reporting Framework for EE and EV Integration",
+              "weightTarget": 0.5,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R4-O4.2",
+          "code": "4.2",
+          "title": "Empowerment of local institutions and private sector through capacity building and reinforced networks and partnerships between stakeholders.",
+          "order": 2,
+          "targets": [
+            {
+              "id": "R4-T4.2.1",
+              "code": "4.2.1",
+              "description": "Affirmative action that necessitates twinning of local and foreign mini-grid developers for mini-grid projects in the country",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "4.2.1      Development of a Mini-Grid Twinning Policy and Guidelines 4.2.2      Creation of a National Mini-Grid Developer Database and Matchmaking Platform 4.2.3      Capacity Building Programs for Local Mini-Grid Developers 4.2.4      Facilitation of Public-Private Dialogue on Mini-Grid Development 4.2.5     Access to Finance and Business Development Support for Local Developers 4.2.6      Monitoring and Evaluation of Twinning Implementation and Impact",
+              "weightTarget": 1,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R4-O4.3",
+          "code": "4.3",
+          "title": "Awareness Raising and Promotion.",
+          "order": 3,
+          "targets": [
+            {
+              "id": "R4-T4.3.1",
+              "code": "4.3.1",
+              "description": "A social and marketing research on RE&EE is conducted in at least 3 tertiary institutions",
+              "timeline": "Short-term",
+              "leadOrg": "Academic Institutions",
+              "sectionSlug": "academic-institutions",
+              "activities": "4.3.1      Collaboration with Tertiary Institutions for Research Design and Implementation 4.3.2      Capacity Building for Students and Researchers on RE & EE Market Analysis 4.3.3      Survey and Data Collection on RE & EE Awareness and Adoption 4.3.4      Public Dissemination of Research Findings through Conferences and Publications 4.3.5      Development of Targeted Awareness Campaigns Based on Research Insights 4.3.6      Policy Engagement to Integrate Research Findings into National RE & EE Strategies",
+              "weightTarget": 0.2,
+              "weightOutput": 0.3,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R4-T4.3.2",
+              "code": "4.3.2",
+              "description": "At least 3 awareness and promotion campaigns on RE&EE completed annually",
+              "timeline": "Short-term",
+              "leadOrg": "UNREEEA",
+              "sectionSlug": "unreeea",
+              "activities": "4.3.2.1      Development of a National RE & EE Awareness Campaign Strategy 4.3.2.2      Organization of Public Awareness Events and Community Engagements 4.3.2.3      Production and Dissemination of RE & EE Educational Materials 4.3.2.4      Collaboration with Influencers, Media, and Industry Stakeholders 4.3.2.5      Implementation of School and University Outreach Programs 4.3.2.6      Monitoring and Evaluation of Awareness Campaign Impact",
+              "weightTarget": 0.2,
+              "weightOutput": 0.3,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R4-T4.3.3",
+              "code": "4.3.3",
+              "description": "Model guideline on e-mobility purchase, charging, servicing, and support developed, published, and promoted",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "STI Secretariat",
+              "sectionSlug": "sti-secretariat",
+              "activities": "4.3.3.1.      Development of the E-Mobility Model Guideline 4.3.3.2.      Stakeholder Consultations and Validation Workshops 4.3.3.3.      Publication and Distribution of the Guideline 4.3.3.4.      Public Awareness Campaigns on E-Mobility Best Practices 4.3.3.5.      Capacity Building for EV Dealers, Charging Station Operators, and Service Providers 4.3.3.6.      Monitoring and Evaluation of Adoption and Impact",
+              "weightTarget": 0.2,
+              "weightOutput": 0.3,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R4-T4.3.4",
+              "code": "4.3.4",
+              "description": "At least 6 RE&EE barazas organized annually",
+              "timeline": "Short-term",
+              "leadOrg": "NREP Secretariat",
+              "sectionSlug": "nrep-secretariat",
+              "activities": "4.3.4.1.      Planning and Coordination of RE & EE Barazas 4.3.4.2.      Community Mobilization and Stakeholder Engagement 4.3.4.3.      Expert-Led Discussions and Demonstrations 4.3.4.4.      Production and Distribution of RE & EE Educational Materials 4.3.4.5.      Collaboration with Media for Wider Reach 4.3.4.6.      Monitoring and Impact Assessment of Baraza Outcomes",
+              "weightTarget": 0.4,
+              "weightOutput": 0.3,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R4-O4.4",
+          "code": "4.4",
+          "title": "RE&EE Demonstration and Upscale.",
+          "order": 4,
+          "targets": [
+            {
+              "id": "R4-T4.4.1",
+              "code": "4.4.1",
+              "description": "At least 2 demos for E-mobility held annually",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "STI Secretariat",
+              "sectionSlug": "sti-secretariat",
+              "activities": "4.4.1.1.      Organize E-Mobility Demonstration Events 4.4.1.2.      Collaboration with E-Mobility Manufacturers and Charging Infrastructure Providers 4.4.1.3.      Engage Stakeholders through Interactive Sessions 4.4.1.4.      Publicity and Awareness Campaigns for E-Mobility Demos  4.4.1.5.      Support for Local Authorities and Businesses to Host Demos 4.4.1.6.      Monitoring and Evaluation of Demo Impact",
+              "weightTarget": 0.3,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R4-T4.4.2",
+              "code": "4.4.2",
+              "description": "At least 2 demos for clean cooking held annually",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "UNACC",
+              "sectionSlug": "unacc",
+              "activities": "4.4.2.1.      Organize Clean Cooking Demonstration Events 4.4.2.2.      Collaboration with Clean Cooking Technology Providers 4.4.2.3.      Engage Local Communities and Stakeholders in Demos  4.4.2.4.      Conduct Educational Sessions and Cooking Trials 4.4.2.5.      Promote Clean Cooking Demos through Media and Community Networks 4.4.2.6.      Monitoring and Impact Assessment of Clean Cooking Demos",
+              "weightTarget": 0.3,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R4-T4.4.3",
+              "code": "4.4.3",
+              "description": "At least 2 demos for productive use of energy held annually",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "USEA",
+              "sectionSlug": "usea",
+              "activities": "4.4.3.1.      Organize Productive Use of Energy Demonstration Events 4.4.3.2.      Partnership with Technology Providers and Local Entrepreneurs  4.4.3.3.      Hands-on Workshops and Training for Local Entrepreneurs  4.4.3.4.      Engage Key Stakeholders through Networking Events 4.4.3.5.      Promotion and Publicity of Productive Use Demonstrations 4.4.3.6.      Impact Monitoring and Data Collection for Future Scaling",
+              "weightTarget": 0.4,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R4-O4.5",
+          "code": "4.5",
+          "title": "RE&EE Capacity Building and Skilling.",
+          "order": 5,
+          "targets": [
+            {
+              "id": "R4-T4.5.1",
+              "code": "4.5.1",
+              "description": "At least RE&EE course introduced major tertiary institutions",
+              "timeline": "Medium-& Long-term",
+              "leadOrg": "Academic Institutions",
+              "sectionSlug": "academic-institutions",
+              "activities": "4.5.1.1.      Collaboration with Tertiary Institutions to Develop Curriculum 4.5.1.2.      Establishment of RE & EE Training Centers and Labs 4.5.1.3.      Faculty Capacity Building through Workshops and Training 4.5.1.4.      Industry Collaboration for Internship and Practical Experience 4.5.1.5.      Promotion and Awareness Campaigns for RE & EE Programs 4.5.1.6.      Monitoring and Evaluation of Course Effectiveness and Industry Alignment",
+              "weightTarget": 0.5,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R4-T4.5.2",
+              "code": "4.5.2",
+              "description": "At least 3 technical capacity building sessions held annually",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "UNREEEA",
+              "sectionSlug": "unreeea",
+              "activities": "4.5.2.1.      Development of a Comprehensive Technical Training Program 4.5.2.2.      Engagement with Industry Experts for Knowledge Sharing 4.5.2.3.      Hosting Regional or National RE & EE Workshops 4.5.2.4.      Collaboration with Technical Institutions and Vocational Training Centers 4.5.2.5.      Promotion of Technical Capacity Building through Online Platforms  4.5.2.6.      Monitoring and Impact Assessment of Training Effectiveness",
+              "weightTarget": 0.5,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R4-O4.6",
+          "code": "4.6",
+          "title": "RE&EE sector research agenda.",
+          "order": 6,
+          "targets": [
+            {
+              "id": "R4-T4.6.1",
+              "code": "4.6.1",
+              "description": "At least 2 industry-based research programmes developed by tertiary institutions",
+              "timeline": "Medium-& Long-term",
+              "leadOrg": "Academic Institutions",
+              "sectionSlug": "academic-institutions",
+              "activities": "4.6.1.1.      Collaboration with Industry Stakeholders to Identify Research Gaps 4.6.1.2.      Development of Industry-Specific Research Programs 4.6.1.3.      Creation of Research Funding and Grant Mechanisms 4.6.1.4.      Facilitation of Collaborative Research Networks  4.6.1.5.      Integration of Industry Insights into Tertiary Education Curriculum 4.6.1.6.      Monitoring, Evaluation, and Dissemination of Research Outcomes",
+              "weightTarget": 0.5,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R4-T4.6.2",
+              "code": "4.6.2",
+              "description": "At least 6 research for industry and policy conducted annually",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "Academic Institutions",
+              "sectionSlug": "academic-institutions",
+              "activities": "4.6.2.1.      Establish Research Priorities in Collaboration with Stakeholders 4.6.2.2.      Create a Research Fund to Support Industry and Policy Studies 4.6.2.3.      Develop Research Partnerships between Academia and Industry 4.6.2.4.      Conduct Sector-Specific Policy Research and Analysis 4.6.2.5.      Facilitate Annual Research Symposiums and Conferences 4.6.2.6.      Monitor and Evaluate the Impact of Research on Policy and Industry Practices",
+              "weightTarget": 0.3,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R4-T4.6.3",
+              "code": "4.6.3",
+              "description": "At least 12 research for industry and policy dialogues held annually",
+              "timeline": "Short-& Medium-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "4.6.3.1.      Organize Monthly Industry-Policy Research Dialogues 4.6.3.2.      Develop a Research Dialogue Platform for Ongoing Collaboration 4.6.3.3.      Facilitate Cross-Sectoral Dialogues on Policy Challenges and Solutions 4.6.3.4.      Host Thematic Research Roundtables and Workshops  4.6.3.5.      Create an Annual RE & EE Policy Research Forum 4.6.3.6.      Monitor and Document Outcomes of Research Dialogues.",
+              "weightTarget": 0.2,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "R5",
+      "code": "R5",
+      "title": "Renewable Energy Act for Uganda",
+      "outcome": "Outcome 5: Enhanced uptake of RE&EE systems for productive use of energy and mini-grids development",
+      "order": 5,
+      "outputs": [
+        {
+          "id": "R5-O5.1",
+          "code": "5.1",
+          "title": "Market intelligence; enhanced awareness of minigrid market and strengthen market knowledge through market intelligence development.",
+          "order": 1,
+          "targets": [
+            {
+              "id": "R5-T5.1.1",
+              "code": "5.1.1",
+              "description": "Development of mini-grids’ development procedure guidelines",
+              "timeline": "Short-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "5.1.1.1.      Market Assessment and Feasibility Studies 5.1.1.2.      Stakeholder Engagement and Consultations 5.1.1.3.      Policy and Regulatory Review for Mini-Grids 5.1.1.4.      Data Collection and Analysis on Mini-Grid Performance 5.1.1.5.      Knowledge-Sharing Platforms and Information Dissemination 5.1.1.6.      Capacity Building and Training for Developers and Policymakers 5.1.2.1.      Comprehensive Mini-Grid Mapping and Inventory",
+              "weightTarget": 0.6,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R5-T5.1.2",
+              "code": "5.1.2",
+              "description": "Development of a mini-grids’ database for the country",
+              "timeline": "Short-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "5.1.2.2.      Stakeholder Data Collection and Verification 5.1.2.3.      Creation of an Online Mini-Grid Information Portal 5.1.2.4.      Market Trends and Demand Analysis 5.1.2.5.      Capacity Building and Awareness Campaigns",
+              "weightTarget": 0.4,
+              "weightOutput": 0.1,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R5-O5.2",
+          "code": "5.2",
+          "title": "Adoption of codes, standards, regulations and labelling",
+          "order": 2,
+          "targets": [
+            {
+              "id": "R5-T5.2.1",
+              "code": "5.2.1",
+              "description": "Adoption of RE&EE standards and labelling for clean cooking appliances",
+              "timeline": "Short-& Medium term",
+              "leadOrg": "MEMD & UNBS",
+              "sectionSlug": "memd-unbs",
+              "activities": "5.2.1.1.      Development and Harmonization of Clean Cooking Standards 5.2.1.2.      Testing and Certification of Clean Cooking Appliances 5.2.1.3.      Policy and Regulatory Framework Development 5.2.1.4.      Stakeholder Engagement and Capacity Building 5.2.1.5.      Implementation of an Energy Labeling Program 5.2.1.6.      Monitoring, Compliance, and Market Surveillance",
+              "weightTarget": 0.1,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R5-T5.2.2",
+              "code": "5.2.2",
+              "description": "Adoption of RE&EE standards and regulations for mini-grids",
+              "timeline": "Short-term",
+              "leadOrg": "ERA",
+              "sectionSlug": "era",
+              "activities": "5.2.2.1.      Development and Harmonization of Mini-Grid Standards 5.2.2.2.      Formulation of Mini-Grid Regulatory Framework 5.2.2.3.      Establishment of Mini-Grid Performance and Efficiency Benchmarks 5.2.2.4.      Implementation of Quality Assurance and Certification Programs 5.2.2.5.      Capacity Building and Stakeholder Training 5.2.2.6.      Monitoring, Compliance, and Enforcement Mechanisms",
+              "weightTarget": 0.1,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R5-T5.2.3",
+              "code": "5.2.3",
+              "description": "Adoption of RE&EE standards and labelling for productive use of energy appliances",
+              "timeline": "Short-& Medium term",
+              "leadOrg": "UNBS",
+              "sectionSlug": "unbs",
+              "activities": "5.2.3.1.      Development and Harmonization of PUE Appliance Standards 5.2.3.2.      Implementation of an Energy Efficiency Labeling System 5.2.3.3.      Testing and Certification of PUE Appliances 5.2.3.4.      Policy and Regulatory Framework Development 5.2.3.5.      Capacity Building and Stakeholder Awareness Campaigns 5.2.3.6.      Market Surveillance and Compliance Monitoring",
+              "weightTarget": 0.1,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R5-T5.2.4",
+              "code": "5.2.4",
+              "description": "Adoption of RE&EE standards and regulations for agrivoltaic systems",
+              "timeline": "Short-& Medium term",
+              "leadOrg": "MAAIF & MEMD",
+              "sectionSlug": "maaif-memd",
+              "activities": "5.2.4.1.      Development and Harmonization of Agrivoltaic Standards 5.2.4.2.      Formulation of Agrivoltaic Regulatory Framework 5.2.4.3.      Testing and Certification of Agrivoltaic Components 5.2.4.4.      Implementation of an Agrivoltaic Labeling and Performance Rating System\"\" 5.2.4.5.      Capacity Building and Stakeholder Engagement 5.2.4.6.      Monitoring, Compliance, and Market Surveillance",
+              "weightTarget": 0.1,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R5-T5.2.5",
+              "code": "5.2.5",
+              "description": "Adoption of a ethical and consumer protection code",
+              "timeline": "Short-& Medium term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "5.2.5.1.      Development of an Ethical and Consumer Protection Code 5.2.5.2.      Stakeholder Consultations and Public Engagement 5.2.5.3.      Legislative and Regulatory Framework Development 5.2.5.4.      Consumer Awareness and Education Campaigns 5.2.5.5.      Compliance Monitoring and Certification Program 5.2.5.6.      Dispute Resolution and Consumer Redress Mechanisms",
+              "weightTarget": 0.3,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R5-T5.2.6",
+              "code": "5.2.6",
+              "description": "Certification of RE&EE technicians, artisans, and other actors",
+              "timeline": "Short-& Medium term",
+              "leadOrg": "DIT",
+              "sectionSlug": "dit",
+              "activities": "5.2.6.1.      Development of RE & EE Certification Standards 5.2.6.2.      Accreditation of Training Institutions 5.2.6.3.      Capacity Building and Skills Development Programs 5.2.6.4.      Implementation of a Certification and Licensing Framework 5.2.6.5.      Awareness and Industry Engagement Campaigns 5.2.6.6.      Monitoring, Compliance, and Recertification Mechanisms",
+              "weightTarget": 0.3,
+              "weightOutput": 0.2,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R5-O5.3",
+          "code": "5.3",
+          "title": "Increased entrepreneurship through productive uses of energy",
+          "order": 3,
+          "targets": [
+            {
+              "id": "R5-T5.3.1",
+              "code": "5.3.1",
+              "description": "At least 10 RE&EE micro and SMEs established upcountry",
+              "timeline": "Short-term",
+              "leadOrg": "UNREEEA",
+              "sectionSlug": "unreeea",
+              "activities": "5.3.1.1.      RE & EE Business Incubators and Accelerators 5.3.1.2.      Microloans and Grants for RE & EE Startups 5.3.1.3.      Capacity Building Workshops for Upcountry Entrepreneurs 5.3.1.4.      Establishment of Regional RE & EE Product Distribution Networks 5.3.1.5.      Public-Private Partnerships for Off-Grid Energy Solutions 5.3.1.6.      Local RE & EE Product Development Competitions",
+              "weightTarget": 0.5,
+              "weightOutput": 0.3,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R5-T5.3.2",
+              "code": "5.3.2",
+              "description": "At least 10% increase in women participation and investment in RE&EE sector",
+              "timeline": "Short-term",
+              "leadOrg": "OUMA/Open Capital",
+              "sectionSlug": "ouma-open-capital",
+              "activities": "5.3.2.1.      Capacity Building and Training Programs 5.3.2.2.      Access to Finance for Women Entrepreneurs 5.3.2.3.      Awareness Campaigns on Women’s Role in Clean Energy 5.3.2.4.      Women-focused Networking and Mentorship Platforms 5.3.2.5.      Promotion of Women-led Energy Innovation Hubs 5.3.2.6.      Integration of Women into RE & EE Supply Chains",
+              "weightTarget": 0.25,
+              "weightOutput": 0.3,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R5-T5.3.3",
+              "code": "5.3.3",
+              "description": "At least 20% annual increment in RE&EE jobs created",
+              "timeline": "Short-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "5.3.3.1.      Establishment of Renewable Energy Training Centers 5.3.3.2.      Partnerships with Universities and Technical Colleges 5.3.3.3.      Local Manufacturing and Assembly of RE & EE Products 5.3.3.4.      Women’s Energy Entrepreneur Networks and Funding Programs 5.3.3.5.      Incentive Programs for Green Startups 5.3.3.6.      Community-based Renewable Energy Projects",
+              "weightTarget": 0.25,
+              "weightOutput": 0.3,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R5-O5.4",
+          "code": "5.4",
+          "title": "Renewable Energy sector mainstreaming",
+          "order": 4,
+          "targets": [
+            {
+              "id": "R5-T5.4.1",
+              "code": "5.4.1",
+              "description": "Development of the Renewable Energy Act for Uganda",
+              "timeline": "Medium-& Long term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "5.4.1.1.      Stakeholder Consultations and Policy Dialogues 5.4.1.2.      Legal and Institutional Capacity Building for Renewable Energy 5.4.1.3.      Technical Assistance for Drafting the Renewable Energy Act 5.4.1.4.      Public Awareness Campaign on Renewable Energy Legislation 5.4.1.5.      Renewable Energy Sector Research and Policy Analysis 5.4.1.6.      Formation of a Multi-Sectoral Task Force for Renewable Energy",
+              "weightTarget": 0.3,
+              "weightOutput": 0.4,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R5-T5.4.2",
+              "code": "5.4.2",
+              "description": "At least 2 stakeholders’ engagements on RE&EE regulation held annually",
+              "timeline": "Short-term",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "5.4.2.1.      Annual Renewable Energy Policy Forums 5.4.2.2.      Multi-Stakeholder Consultative Workshops on RE & EE Regulations 5.4.2.3.      Capacity-Building Training for Policymakers and Regulators 5.4.2.4.      Public-Private Dialogue Sessions on RE Investment and Regulation 5.4.2.5.      Technical Roundtable Discussions on RE & EE Policy Implementation 5.4.2.6.      Stakeholder Engagement via Online Platforms and Webinars",
+              "weightTarget": 0.3,
+              "weightOutput": 0.4,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R5-T5.4.3",
+              "code": "5.4.3",
+              "description": "At least 4 policy briefs on RE&EE developed annually",
+              "timeline": "Short-term",
+              "leadOrg": "Development Partners & Private Sector Actors",
+              "sectionSlug": "development-partners-pri",
+              "activities": "5.4.3.1.      Research and Data Collection on RE & EE Policy Gaps 5.4.3.2.      Multi-Stakeholder Consultations for Policy Development 5.4.3.3.      Technical Expert Working Groups on RE & EE 5.4.3.4.      Policy Analysis and Benchmarking Against Global Best Practices 5.4.3.5.      Engagement of Policymakers and Legislators in RE & EE Advocacy 5.4.3.6.      Publication and Dissemination of Policy Briefs",
+              "weightTarget": 0.4,
+              "weightOutput": 0.4,
+              "weightOutcome": 0.1,
+              "y1": {
+                "target": 0,
+                "initiatives": 0,
+                "kra": 0
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "slug": "academic-institutions",
+      "name": "Academic Institutions",
+      "teamId": "6a457476002344199265"
+    },
+    {
+      "slug": "bank-of-uganda",
+      "name": "Bank of Uganda",
+      "teamId": "6a457477000ad0be6001"
+    },
+    {
+      "slug": "creec",
+      "name": "CREEC",
+      "teamId": "6a45747700318942fb23"
+    },
+    {
+      "slug": "dit",
+      "name": "DIT",
+      "teamId": "6a4574780018c1f0c1aa"
+    },
+    {
+      "slug": "development-partners-pri",
+      "name": "Development Partners & Private Sector Actors",
+      "teamId": "6a457478003e7d4faf9f"
+    },
+    {
+      "slug": "era",
+      "name": "ERA",
+      "teamId": "6a4574790025bac88a28"
+    },
+    {
+      "slug": "maaif-memd",
+      "name": "MAAIF & MEMD",
+      "teamId": "6a45747a000e120c8db6"
+    },
+    {
+      "slug": "memd",
+      "name": "MEMD",
+      "teamId": "6a45747a003528af6f9e"
+    },
+    {
+      "slug": "memd-mowt",
+      "name": "MEMD & MoWT",
+      "teamId": "6a45747b001e4febdfac"
+    },
+    {
+      "slug": "memd-unbs",
+      "name": "MEMD & UNBS",
+      "teamId": "6a45747c0005a03b3e5c"
+    },
+    {
+      "slug": "molhud",
+      "name": "MoLHUD",
+      "teamId": "6a45747c002bbf665588"
+    },
+    {
+      "slug": "mowt-for-transport-work-",
+      "name": "MoWT (for Transport & work safety) MoLHUD (for buildings)",
+      "teamId": "6a45747d0013c4101f2b"
+    },
+    {
+      "slug": "nrep-secretariat",
+      "name": "NREP Secretariat",
+      "teamId": "6a45747d003a5cbb499c"
+    },
+    {
+      "slug": "ouma-open-capital",
+      "name": "OUMA/Open Capital",
+      "teamId": "6a45747e0022890d03cb"
+    },
+    {
+      "slug": "psfu-uma",
+      "name": "PSFU & UMA",
+      "teamId": "6a45747f000af4214254"
+    },
+    {
+      "slug": "sti-secretariat",
+      "name": "STI Secretariat",
+      "teamId": "6a45747f003141f19b50"
+    },
+    {
+      "slug": "ueccc",
+      "name": "UECCC",
+      "teamId": "6a45748000192bd65930"
+    },
+    {
+      "slug": "uia-memd",
+      "name": "UIA & MEMD",
+      "teamId": "6a45748100008709bca5"
+    },
+    {
+      "slug": "unacc",
+      "name": "UNACC",
+      "teamId": "6a457481002678156b90"
+    },
+    {
+      "slug": "unacc-wreau",
+      "name": "UNACC & WREAU",
+      "teamId": "6a457482000e49878f44"
+    },
+    {
+      "slug": "unba",
+      "name": "UNBA",
+      "teamId": "6a4574820033eb9d32a6"
+    },
+    {
+      "slug": "unbs",
+      "name": "UNBS",
+      "teamId": "6a457483001b5f76ca91"
+    },
+    {
+      "slug": "unreeea",
+      "name": "UNREEEA",
+      "teamId": "6a45748400022dabc732"
+    },
+    {
+      "slug": "unreeea-members",
+      "name": "UNREEEA & members",
+      "teamId": "6a45748400277d167c5a"
+    },
+    {
+      "slug": "usea",
+      "name": "USEA",
+      "teamId": "6a457485000e1d53836e"
+    },
+    {
+      "slug": "usea-unreea",
+      "name": "USEA & UNREEA",
+      "teamId": "6a457485003365fec30f"
+    },
+    {
+      "slug": "uganda-bankers-associati",
+      "name": "Uganda Bankers’ Association",
+      "teamId": "6a4574860019f8258b92"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-fraunces: 'Fraunces', serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+body {
+  background-color: #F6F2E8;
+  color: #262420;
+}
+
+/* Hairline rule used to echo the dossier/ledger feel of the source matrix */
+.rule {
+  border-top: 1px solid #D8CFB8;
+}
+
+.seal {
+  border-radius: 50%;
+}
+
+.auth-input {
+  width: 100%;
+  border: 1px solid #D8CFB8;
+  background: #FFFFFF;
+  padding: 0.65rem 0.75rem;
+  font-size: 0.9rem;
+  color: #262420;
+}
+.auth-input:focus {
+  outline: 2px solid #D98E2B;
+  outline-offset: 1px;
+}
+
+::selection {
+  background: #D98E2B;
+  color: #16322A;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
