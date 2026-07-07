@@ -7,7 +7,7 @@ export interface Profile {
   email: string;
   role: Role;
   status: ProfileStatus;
-  sectionSlugs: string[]; // sections (teams) this person belongs to
+  sectionSlugs: string[];
   createdAt: string;
 }
 
@@ -20,7 +20,7 @@ export interface Section {
 
 export interface ResultDoc {
   $id: string;
-  code: string; // R1..R5
+  code: string;
   title: string;
   outcome: string | null;
   order: number;
@@ -29,7 +29,7 @@ export interface ResultDoc {
 export interface OutputDoc {
   $id: string;
   resultId: string;
-  code: string; // 1.1, 1.2...
+  code: string;
   title: string;
   order: number;
 }
@@ -38,7 +38,7 @@ export interface TargetDoc {
   $id: string;
   outputId: string;
   resultId: string;
-  code: string; // 1.1.1
+  code: string;
   description: string;
   timeline: string | null;
   leadOrg: string;
@@ -54,6 +54,7 @@ export interface TargetDoc {
   y2Initiatives: number | null;
   y2Kra: number | null;
   progressPercent: number;
+  scoreManual: number | null;
   status: TargetStatus;
   assignedUserIds: string[];
   updatedAt: string;
@@ -69,6 +70,17 @@ export interface CommentDoc {
   createdAt: string;
 }
 
+export interface ReportDoc {
+  $id: string;
+  targetId: string;
+  fileId: string;
+  fileName: string;
+  description: string | null;
+  uploadedBy: string;
+  uploadedByName: string;
+  uploadedAt: string;
+}
+
 export interface PendingUpdateDoc {
   $id: string;
   targetId: string;
@@ -78,6 +90,7 @@ export interface PendingUpdateDoc {
   submittedAt: string;
   proposedProgressPercent: number;
   proposedStatus: TargetStatus;
+  proposedScoreManual: number | null;
   justification: string | null;
   reviewStatus: 'pending' | 'approved' | 'rejected';
   reviewedBy: string | null;
@@ -102,13 +115,15 @@ export interface YearlyRecordDoc {
   recordedAt: string;
 }
 
-export interface ReportDoc {
+/** Recommendation action — logged against an R6 target */
+export interface RecActionDoc {
   $id: string;
   targetId: string;
-  fileId: string;
-  fileName: string;
-  description: string | null;
-  uploadedBy: string;
-  uploadedByName: string;
-  uploadedAt: string;
+  actionDescription: string;
+  actionedBy: string;
+  actionedByName: string;
+  organisation: string | null;
+  score: number | null;
+  actionedAt: string;
+  status: 'pending' | 'in_progress' | 'completed';
 }

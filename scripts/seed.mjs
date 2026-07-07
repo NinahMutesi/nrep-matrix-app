@@ -112,6 +112,7 @@ async function main() {
             y2Initiatives: target.y2?.initiatives ?? null,
             y2Kra: target.y2?.kra ?? null,
             progressPercent: 0,
+            scoreManual: null,
             status: 'not_started',
             assignedUserIds: [],
             updatedAt: new Date().toISOString(),

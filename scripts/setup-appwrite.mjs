@@ -59,7 +59,7 @@ async function main() {
   await attr(() => databases.createStringAttribute(DATABASE_ID, 'profiles', 'userId', 64, true));
   await attr(() => databases.createStringAttribute(DATABASE_ID, 'profiles', 'name', 128, true));
   await attr(() => databases.createEmailAttribute(DATABASE_ID, 'profiles', 'email', true));
-  await attr(() => databases.createEnumAttribute(DATABASE_ID, 'profiles', 'role', ['admin', 'analyst', 'member', 'viewer'], true));
+  await attr(() => databases.createEnumAttribute(DATABASE_ID, 'profiles', 'role', ['super_admin', 'admin', 'analyst', 'member', 'viewer'], true));
   await attr(() => databases.createEnumAttribute(DATABASE_ID, 'profiles', 'status', ['pending', 'approved', 'rejected'], true));
   await attr(() => databases.createStringAttribute(DATABASE_ID, 'profiles', 'sectionSlugs', 64, false, undefined, true));
   await attr(() => databases.createDatetimeAttribute(DATABASE_ID, 'profiles', 'createdAt', true));
@@ -116,6 +116,7 @@ async function main() {
   await attr(() => databases.createFloatAttribute(DATABASE_ID, 'targets', 'y2Initiatives', false));
   await attr(() => databases.createFloatAttribute(DATABASE_ID, 'targets', 'y2Kra', false));
   await attr(() => databases.createIntegerAttribute(DATABASE_ID, 'targets', 'progressPercent', true, 0, 100));
+  await attr(() => databases.createIntegerAttribute(DATABASE_ID, 'targets', 'scoreManual', false, 0, 25));
   await attr(() =>
     databases.createEnumAttribute(
       DATABASE_ID,
@@ -214,6 +215,20 @@ async function main() {
   await attr(() => databases.createStringAttribute(DATABASE_ID, 'pending_updates', 'reviewNote', 1024, false));
   await index(() => databases.createIndex(DATABASE_ID, 'pending_updates', 'idx_reviewStatus', 'key', ['reviewStatus']));
   await index(() => databases.createIndex(DATABASE_ID, 'pending_updates', 'idx_targetId_pu', 'key', ['targetId']));
+
+  console.log('-> Collection: rec_actions');
+  await ignoreExists(
+    databases.createCollection(DATABASE_ID, 'rec_actions', 'Recommendation Actions', [Permission.read(Role.users())])
+  );
+  await attr(() => databases.createStringAttribute(DATABASE_ID, 'rec_actions', 'targetId', 64, true));
+  await attr(() => databases.createStringAttribute(DATABASE_ID, 'rec_actions', 'actionDescription', 2048, true));
+  await attr(() => databases.createStringAttribute(DATABASE_ID, 'rec_actions', 'actionedBy', 64, true));
+  await attr(() => databases.createStringAttribute(DATABASE_ID, 'rec_actions', 'actionedByName', 128, true));
+  await attr(() => databases.createStringAttribute(DATABASE_ID, 'rec_actions', 'organisation', 256, false));
+  await attr(() => databases.createIntegerAttribute(DATABASE_ID, 'rec_actions', 'score', false, 0, 25));
+  await attr(() => databases.createDatetimeAttribute(DATABASE_ID, 'rec_actions', 'actionedAt', true));
+  await attr(() => databases.createEnumAttribute(DATABASE_ID, 'rec_actions', 'status', ['pending', 'in_progress', 'completed'], true));
+  await index(() => databases.createIndex(DATABASE_ID, 'rec_actions', 'idx_targetId_ra', 'key', ['targetId']));
 
   console.log('-> Storage bucket: reports');
   await ignoreExists(

@@ -126,8 +126,48 @@ ${reviewNote ? `<p><strong>Reviewer note:</strong> ${reviewNote}</p>` : ''}
 }
 
 /**
- * Notify section members that a new comment was posted on one of their tasks.
+ * Notify a user when they are assigned to a specific target.
  */
+export async function notifyTargetAssignment({
+  assignedUserIds,
+  targetDescription,
+  targetId,
+  assignedByName,
+}: {
+  assignedUserIds: string[];
+  targetDescription: string;
+  targetId: string;
+  assignedByName: string;
+}) {
+  if (!assignedUserIds.length) return;
+  try {
+    const messaging = getMessaging();
+    await messaging.createEmail(
+      ID.unique(),
+      `[NREP Matrix] You have been assigned a target`,
+      `
+<p>Hi,</p>
+<p>You have been assigned to track and update progress on the following target by <strong>${assignedByName}</strong>:</p>
+<blockquote style="border-left:3px solid #D98E2B;padding-left:12px;color:#444;">
+  ${targetDescription}
+</blockquote>
+<p>Please log in to the NREP Implementation Matrix to review the target details, update progress, and add comments as implementation proceeds.</p>
+<p><a href="${APP_URL}/matrix/${targetId}">Open this target →</a></p>
+      `.trim(),
+      [],
+      assignedUserIds,
+      [],
+      [],
+      [],
+      [],
+      false,
+      true,
+    );
+  } catch (err) {
+    console.warn('[email] notifyTargetAssignment failed:', err);
+  }
+}
+
 export async function notifyNewComment({
   targetDescription,
   targetId,

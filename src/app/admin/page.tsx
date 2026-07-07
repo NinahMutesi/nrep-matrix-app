@@ -73,13 +73,13 @@ export default function AdminPage() {
             <Section title={`Pending requests (${pending.length})`}>
               {pending.length === 0 && <Empty>No pending requests.</Empty>}
               {pending.map((p) => (
-                <UserRow key={p.$id} profile={p} sections={matrix?.sections ?? []} onPatch={patch} />
+                <UserRow key={p.$id} profile={p} sections={matrix?.sections ?? []} onPatch={patch} callerProfile={profile} />
               ))}
             </Section>
 
             <Section title={`All people (${others.length})`}>
               {others.map((p) => (
-                <UserRow key={p.$id} profile={p} sections={matrix?.sections ?? []} onPatch={patch} />
+                <UserRow key={p.$id} profile={p} sections={matrix?.sections ?? []} onPatch={patch} callerProfile={profile} />
               ))}
             </Section>
           </>
@@ -106,10 +106,12 @@ function UserRow({
   profile,
   sections,
   onPatch,
+  callerProfile,
 }: {
   profile: Profile;
   sections: { slug: string; name: string }[];
   onPatch: (id: string, body: { status?: ProfileStatus; role?: Role; sectionSlugs?: string[] }) => void;
+  callerProfile: Profile | null;
 }) {
   const [role, setRole] = useState<Role>(profile.role);
   const [sectionSlugs, setSectionSlugs] = useState<string[]>(profile.sectionSlugs ?? []);
@@ -144,6 +146,7 @@ function UserRow({
           <option value="member">Member (section editor)</option>
           <option value="analyst">Analyst</option>
           <option value="admin">Admin</option>
+          {profile?.role === 'super_admin' && <option value="super_admin">Super Admin</option>}
         </select>
 
         <details className="relative">

@@ -25,7 +25,7 @@ export function TargetTable({
   }
 
   return (
-    <div className="overflow-hidden border border-line bg-white">
+    <div className="overflow-hidden bg-white" style={{ borderRadius: "10px", border: "1px solid #D0D8DA" }}>
       <table className="w-full text-left text-sm">
         <thead>
           <tr className="border-b border-line bg-parchdim/60 font-mono text-[10px] uppercase tracking-wider text-charcoal/50">

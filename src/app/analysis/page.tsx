@@ -183,7 +183,7 @@ export default function AnalysisPage() {
               </ResponsiveContainer>
             </ChartCard>
 
-            <div className="border border-line bg-white p-5 lg:col-span-2">
+            <div className="bg-white p-5 lg:col-span-2">
               <p className="font-mono text-[11px] uppercase tracking-wider text-charcoal/50">
                 Yet to be accomplished — at risk &amp; delayed ({atRisk.length})
               </p>
@@ -215,7 +215,7 @@ export default function AnalysisPage() {
 
 function ChartCard({ title, children, span }: { title: string; children: React.ReactNode; span?: boolean }) {
   return (
-    <div className={`border border-line bg-white p-5 ${span ? 'lg:col-span-2' : ''}`}>
+    <div className={`bg-white p-5 ${span ? 'lg:col-span-2' : ''}`}>
       <p className="font-mono text-[11px] uppercase tracking-wider text-charcoal/50">{title}</p>
       <div className="mt-3">{children}</div>
     </div>

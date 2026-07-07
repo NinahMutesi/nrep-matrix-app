@@ -9,11 +9,17 @@
 }
 
 body {
-  background-color: #F6F2E8;
+  background-color: #EEF3F5;
   color: #262420;
 }
 
-/* Hairline rule used to echo the dossier/ledger feel of the source matrix */
+/* Card — shared rounded style used across all cards */
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Hairline rule */
 .rule {
   border-top: 1px solid #D8CFB8;
 }

@@ -1668,143 +1668,360 @@
           ]
         }
       ]
+    },
+    {
+      "id": "R6",
+      "code": "R6",
+      "title": "Recommendations & Lessons Learned",
+      "outcome": "Strategic recommendations from implementation experience are systematically captured, actioned, and tracked to improve NREP Strategic Plan delivery.",
+      "order": 6,
+      "outputs": [
+        {
+          "id": "R6-O1",
+          "code": "6.1",
+          "title": "Policy and Regulatory Recommendations",
+          "order": 1,
+          "targets": [
+            {
+              "id": "R6-T1.1",
+              "code": "6.1.1",
+              "description": "Review and strengthen the renewable energy licensing framework to reduce bureaucratic delays for project developers.",
+              "timeline": "2024/25",
+              "leadOrg": "MEMD",
+              "sectionSlug": "memd",
+              "activities": "Stakeholder consultations; policy gap analysis; draft amendments",
+              "weightTarget": null,
+              "weightOutput": null,
+              "weightOutcome": null,
+              "y1": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R6-T1.2",
+              "code": "6.1.2",
+              "description": "Develop a standardised feed-in tariff framework aligned with regional benchmarks to attract private investment.",
+              "timeline": "2025/26",
+              "leadOrg": "ERA",
+              "sectionSlug": "era",
+              "activities": "Economic modelling; stakeholder workshops; policy drafting",
+              "weightTarget": null,
+              "weightOutput": null,
+              "weightOutcome": null,
+              "y1": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R6-O2",
+          "code": "6.2",
+          "title": "Technical and Capacity Recommendations",
+          "order": 2,
+          "targets": [
+            {
+              "id": "R6-T2.1",
+              "code": "6.2.1",
+              "description": "Establish a national renewable energy skills register to track qualified technicians and match them with project needs.",
+              "timeline": "2024/25",
+              "leadOrg": "NREP Secretariat",
+              "sectionSlug": "nrep-secretariat",
+              "activities": "Skills audit; database development; stakeholder engagement",
+              "weightTarget": null,
+              "weightOutput": null,
+              "weightOutcome": null,
+              "y1": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R6-T2.2",
+              "code": "6.2.2",
+              "description": "Scale up the CREEC training programme to include rural electrification technicians in at least 10 districts by 2026.",
+              "timeline": "2025/26",
+              "leadOrg": "CREEC",
+              "sectionSlug": "creec",
+              "activities": "Curriculum review; trainer recruitment; district outreach",
+              "weightTarget": null,
+              "weightOutput": null,
+              "weightOutcome": null,
+              "y1": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R6-O3",
+          "code": "6.3",
+          "title": "Financial and Investment Recommendations",
+          "order": 3,
+          "targets": [
+            {
+              "id": "R6-T3.1",
+              "code": "6.3.1",
+              "description": "Establish a blended finance facility specifically for small-scale renewable energy projects below 1MW to de-risk private investment.",
+              "timeline": "2025/26",
+              "leadOrg": "UECCC",
+              "sectionSlug": "ueccc",
+              "activities": "Finance structuring; partner engagement; facility design",
+              "weightTarget": null,
+              "weightOutput": null,
+              "weightOutcome": null,
+              "y1": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R6-T3.2",
+              "code": "6.3.2",
+              "description": "Develop green bond guidelines aligned with international standards to mobilise capital market financing for RE projects.",
+              "timeline": "2026/27",
+              "leadOrg": "Bank of Uganda",
+              "sectionSlug": "bank-of-uganda",
+              "activities": "Market assessment; guidelines drafting; stakeholder validation",
+              "weightTarget": null,
+              "weightOutput": null,
+              "weightOutcome": null,
+              "y1": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        },
+        {
+          "id": "R6-O4",
+          "code": "6.4",
+          "title": "Monitoring, Evaluation and Learning Recommendations",
+          "order": 4,
+          "targets": [
+            {
+              "id": "R6-T4.1",
+              "code": "6.4.1",
+              "description": "Institutionalise quarterly implementation review meetings with all 27 lead organisations using data from the digital matrix system.",
+              "timeline": "2023/24",
+              "leadOrg": "NREP Secretariat",
+              "sectionSlug": "nrep-secretariat",
+              "activities": "Meeting framework; ToR drafting; scheduling",
+              "weightTarget": null,
+              "weightOutput": null,
+              "weightOutcome": null,
+              "y1": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            },
+            {
+              "id": "R6-T4.2",
+              "code": "6.4.2",
+              "description": "Publish an annual NREP implementation progress report to be presented to Parliament and shared with development partners.",
+              "timeline": "2024/25",
+              "leadOrg": "NREP Secretariat",
+              "sectionSlug": "nrep-secretariat",
+              "activities": "Report template development; data collection; publication",
+              "weightTarget": null,
+              "weightOutput": null,
+              "weightOutcome": null,
+              "y1": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              },
+              "y2": {
+                "target": null,
+                "initiatives": null,
+                "kra": null
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   "sections": [
     {
       "slug": "academic-institutions",
       "name": "Academic Institutions",
-      "teamId": "6a457476002344199265"
+      "teamId": "6a4d0f5d003a338b6aa6"
     },
     {
       "slug": "bank-of-uganda",
       "name": "Bank of Uganda",
-      "teamId": "6a457477000ad0be6001"
+      "teamId": "6a4d0f5e002a7df7afa8"
     },
     {
       "slug": "creec",
       "name": "CREEC",
-      "teamId": "6a45747700318942fb23"
+      "teamId": "6a4d0f5f001a7426a4a6"
     },
     {
       "slug": "dit",
       "name": "DIT",
-      "teamId": "6a4574780018c1f0c1aa"
+      "teamId": "6a4d0f60000abdfd8387"
     },
     {
       "slug": "development-partners-pri",
       "name": "Development Partners & Private Sector Actors",
-      "teamId": "6a457478003e7d4faf9f"
+      "teamId": "6a4d0f6000390501e1ae"
     },
     {
       "slug": "era",
       "name": "ERA",
-      "teamId": "6a4574790025bac88a28"
+      "teamId": "6a4d0f610029d2dc65ce"
     },
     {
       "slug": "maaif-memd",
       "name": "MAAIF & MEMD",
-      "teamId": "6a45747a000e120c8db6"
+      "teamId": "6a4d0f62002c02958273"
     },
     {
       "slug": "memd",
       "name": "MEMD",
-      "teamId": "6a45747a003528af6f9e"
+      "teamId": "6a4d0f63001ad60ea70e"
     },
     {
       "slug": "memd-mowt",
       "name": "MEMD & MoWT",
-      "teamId": "6a45747b001e4febdfac"
+      "teamId": "6a4d0f64000a1370ad47"
     },
     {
       "slug": "memd-unbs",
       "name": "MEMD & UNBS",
-      "teamId": "6a45747c0005a03b3e5c"
+      "teamId": "6a4d0f640038b8ff0c53"
     },
     {
       "slug": "molhud",
       "name": "MoLHUD",
-      "teamId": "6a45747c002bbf665588"
+      "teamId": "6a4d0f650027491a7696"
     },
     {
       "slug": "mowt-for-transport-work-",
       "name": "MoWT (for Transport & work safety) MoLHUD (for buildings)",
-      "teamId": "6a45747d0013c4101f2b"
+      "teamId": "6a4d0f660015ae4f2345"
     },
     {
       "slug": "nrep-secretariat",
       "name": "NREP Secretariat",
-      "teamId": "6a45747d003a5cbb499c"
+      "teamId": "6a4d0f67000485abdf2e"
     },
     {
       "slug": "ouma-open-capital",
       "name": "OUMA/Open Capital",
-      "teamId": "6a45747e0022890d03cb"
+      "teamId": "6a4d0f670032c358e2db"
     },
     {
       "slug": "psfu-uma",
       "name": "PSFU & UMA",
-      "teamId": "6a45747f000af4214254"
+      "teamId": "6a4d0f68002254846208"
     },
     {
       "slug": "sti-secretariat",
       "name": "STI Secretariat",
-      "teamId": "6a45747f003141f19b50"
+      "teamId": "6a4d0f690010d562a49b"
     },
     {
       "slug": "ueccc",
       "name": "UECCC",
-      "teamId": "6a45748000192bd65930"
+      "teamId": "6a4d0f69003e0532fb0d"
     },
     {
       "slug": "uia-memd",
       "name": "UIA & MEMD",
-      "teamId": "6a45748100008709bca5"
+      "teamId": "6a4d0f6a002cc86db8f7"
     },
     {
       "slug": "unacc",
       "name": "UNACC",
-      "teamId": "6a457481002678156b90"
+      "teamId": "6a4d0f6b001c0fd4b0d3"
     },
     {
       "slug": "unacc-wreau",
       "name": "UNACC & WREAU",
-      "teamId": "6a457482000e49878f44"
+      "teamId": "6a4d0f6c000abd032f84"
     },
     {
       "slug": "unba",
       "name": "UNBA",
-      "teamId": "6a4574820033eb9d32a6"
+      "teamId": "6a4d0f6e002ab0fc554c"
     },
     {
       "slug": "unbs",
       "name": "UNBS",
-      "teamId": "6a457483001b5f76ca91"
+      "teamId": "6a4d0f6f0019bdd0c9b0"
     },
     {
       "slug": "unreeea",
       "name": "UNREEEA",
-      "teamId": "6a45748400022dabc732"
+      "teamId": "6a4d0f700008f7d2aeeb"
     },
     {
       "slug": "unreeea-members",
       "name": "UNREEEA & members",
-      "teamId": "6a45748400277d167c5a"
+      "teamId": "6a4d0f70003a06294d32"
     },
     {
       "slug": "usea",
       "name": "USEA",
-      "teamId": "6a457485000e1d53836e"
+      "teamId": "6a4d0f710029785c3c5e"
     },
     {
       "slug": "usea-unreea",
       "name": "USEA & UNREEA",
-      "teamId": "6a457485003365fec30f"
+      "teamId": "6a4d0f72002025e79a5c"
     },
     {
       "slug": "uganda-bankers-associati",
       "name": "Uganda Bankers’ Association",
-      "teamId": "6a4574860019f8258b92"
+      "teamId": "6a4d0f73001c5038723c"
     }
   ]
 }
