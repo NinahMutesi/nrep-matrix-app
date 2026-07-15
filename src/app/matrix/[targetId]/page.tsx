@@ -11,6 +11,7 @@ import { MultiRaterScore } from '@/components/MultiRaterScore';
 import { ProgressControls } from '@/components/ProgressControls';
 import { CommentThread } from '@/components/CommentThread';
 import { ReportUploader } from '@/components/ReportUploader';
+import { LinksSection } from '@/components/LinksSection';
 import { YearlyTracker } from '@/components/YearlyTracker';
 import { RecActionTracker } from '@/components/RecActionTracker';
 import { SectionAdminReview } from '@/components/SectionAdminReview';
@@ -24,30 +25,25 @@ export default function TargetDetailPage() {
 }
 
 function TargetDetailPageInner() {
-  const params      = useParams<{ targetId: string }>();
+  const params       = useParams<{ targetId: string }>();
   const searchParams = useSearchParams();
-  const router      = useRouter();
-  const { profile } = useAuth();
+  const router       = useRouter();
+  const { profile }  = useAuth();
 
   const [target,  setTarget]  = useState<TargetDoc | null>(null);
   const [output,  setOutput]  = useState<OutputDoc | null>(null);
   const [result,  setResult]  = useState<ResultDoc | null>(null);
   const [loading, setLoading] = useState(true);
-
-  // Activity counts — shown in summary cards at top
-  const [counts, setCounts] = useState({ comments: 0, reviews: 0, reports: 0 });
+  const [counts,  setCounts]  = useState({ comments: 0, reviews: 0, reports: 0, links: 0 });
 
   const from      = searchParams.get('from');
   const backHref  = from === 'my_section' ? '/dashboard?mode=my_section' : '/matrix';
   const backLabel = from === 'my_section' ? '← My Section' : '← Back to matrix';
 
-  // Load target + related docs
   const loadTarget = useCallback(async () => {
     setLoading(true);
     try {
-      const t = (await databases.getDocument(
-        DATABASE_ID, COLLECTIONS.TARGETS, params.targetId
-      )) as unknown as TargetDoc;
+      const t = (await databases.getDocument(DATABASE_ID, COLLECTIONS.TARGETS, params.targetId)) as unknown as TargetDoc;
       setTarget(t);
       const [o, r] = await Promise.all([
         databases.getDocument(DATABASE_ID, COLLECTIONS.OUTPUTS, t.outputId),
@@ -60,7 +56,6 @@ function TargetDetailPageInner() {
     }
   }, [params.targetId]);
 
-  // Load activity counts — called on mount and whenever child components report a change
   const refreshCounts = useCallback(async () => {
     try {
       const [commentsRes, reportsRes] = await Promise.all([
@@ -68,10 +63,12 @@ function TargetDetailPageInner() {
         authedFetch(`/api/targets/${params.targetId}/reports`),
       ]);
       const allComments = commentsRes.comments ?? [];
+      const allReports  = reportsRes.reports ?? [];
       setCounts({
-        comments: allComments.filter((c: any) => !c.body?.startsWith('[ADMIN REVIEW]')).length,
+        comments: allComments.filter((c: any) => !c.body?.startsWith('[ADMIN REVIEW]') && !c.body?.startsWith('[LINK] ')).length,
         reviews:  allComments.filter((c: any) =>  c.body?.startsWith('[ADMIN REVIEW]')).length,
-        reports:  (reportsRes.reports ?? []).filter((r: any) => !r.description?.startsWith('year:')).length,
+        links:    allComments.filter((c: any) =>  c.body?.startsWith('[LINK] ')).length,
+        reports:  allReports.filter((r: any)  => !r.description?.startsWith('year:')).length,
       });
     } catch { /* silent */ }
   }, [params.targetId]);
@@ -125,44 +122,32 @@ function TargetDetailPageInner() {
           <StatusBadge status={target.status} />
         </div>
 
-        {/* Activity summary — updates live when items are added */}
-        <div className="mt-5 grid grid-cols-3 gap-3">
+        {/* Activity summary — 4 counts now including links */}
+        <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <SummaryCard icon="💬" count={counts.comments} label="Comments" />
-          <SummaryCard
-            icon="✅"
-            count={counts.reviews}
-            label="Admin reviews"
-            highlight={counts.reviews > 0}
-          />
-          <SummaryCard icon="📎" count={counts.reports} label="Reports uploaded" />
+          <SummaryCard icon="✅" count={counts.reviews}  label="Admin reviews" highlight={counts.reviews > 0} />
+          <SummaryCard icon="🔗" count={counts.links}    label="Links shared" />
+          <SummaryCard icon="📎" count={counts.reports}  label="Files uploaded" />
         </div>
 
         {/* Performance score */}
         <div className="mt-5 overflow-hidden rounded-lg border-l-4 bg-white p-4 shadow-sm"
           style={{ borderLeftColor: '#EF4444' }}>
           <div className="flex items-center justify-between">
-            <p className="text-sm font-bold uppercase tracking-wider text-gray-500">
-              Performance Score
-            </p>
+            <p className="text-sm font-bold uppercase tracking-wider text-gray-500">Performance Score</p>
             <ScoreBadge
               progressPercent={target.progressPercent ?? 0}
               weightTarget={target.weightTarget}
               scoreManual={target.scoreManual}
-              showLabel
-              size="md"
+              showLabel size="md"
             />
           </div>
           <div className="mt-2">
-            <ScoreBar
-              progressPercent={target.progressPercent ?? 0}
-              weightTarget={target.weightTarget}
-              scoreManual={target.scoreManual}
-              height={8}
-            />
+            <ScoreBar progressPercent={target.progressPercent ?? 0} weightTarget={target.weightTarget} scoreManual={target.scoreManual} height={8} />
           </div>
         </div>
 
-        {/* Multi-rater scoring — passes result code so correct admin name shows */}
+        {/* Multi-rater scoring */}
         <div className="mt-4">
           <MultiRaterScore
             targetId={target.$id}
@@ -182,21 +167,14 @@ function TargetDetailPageInner() {
               initialPercent={target.progressPercent ?? 0}
               initialStatus={target.status}
               isAdmin={adminUser}
-              onUpdated={(percent, status) =>
-                setTarget({ ...target, progressPercent: percent, status })
-              }
+              onUpdated={(percent, status) => setTarget({ ...target, progressPercent: percent, status })}
             />
           ) : (
             <div className="rounded-lg border-2 bg-white p-5" style={{ borderColor: '#D0D8DA' }}>
-              <p className="text-sm font-bold uppercase tracking-wider text-gray-500">
-                Current Progress
-              </p>
-              <p className="mt-1 font-display text-2xl font-bold text-gray-900">
-                {target.progressPercent ?? 0}%
-              </p>
+              <p className="text-sm font-bold uppercase tracking-wider text-gray-500">Current Progress</p>
+              <p className="mt-1 font-display text-2xl font-bold text-gray-900">{target.progressPercent ?? 0}%</p>
               <p className="mt-1 text-sm text-gray-400">
-                Only members of <strong>{target.leadOrg}</strong> or an administrator
-                can update this task.
+                Only members of <strong>{target.leadOrg}</strong> or an administrator can update this task.
               </p>
             </div>
           )}
@@ -214,7 +192,7 @@ function TargetDetailPageInner() {
           </div>
         )}
 
-        {/* Section admin review — refreshCounts so badge updates immediately */}
+        {/* Section admin review */}
         {(sectionAdminUser || adminUser) && (
           <div className="mt-4">
             <SectionAdminReview
@@ -226,7 +204,7 @@ function TargetDetailPageInner() {
           </div>
         )}
 
-        {/* Comments + reports — both refresh counts on save */}
+        {/* Bottom grid: Comments | Reports & Screenshots */}
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
           <CommentThread
             targetId={target.$id}
@@ -240,26 +218,31 @@ function TargetDetailPageInner() {
           />
         </div>
 
+        {/* Links section — full width below */}
+        <div className="mt-4">
+          <LinksSection
+            targetId={target.$id}
+            canAdd={contributable}
+            onLinkAdded={refreshCounts}
+          />
+        </div>
+
       </div>
     </AppShell>
   );
 }
 
-function SummaryCard({
-  icon, count, label, highlight,
-}: {
+function SummaryCard({ icon, count, label, highlight }: {
   icon: string; count: number; label: string; highlight?: boolean;
 }) {
   return (
     <div
-      className="flex items-center gap-3 rounded-lg border-2 bg-white px-4 py-3"
+      className="flex items-center gap-3 rounded-lg border-2 bg-white px-3 py-3"
       style={{ borderColor: highlight ? '#054653' : '#E5E7EB' }}
     >
-      <span className="text-2xl">{icon}</span>
+      <span className="text-xl">{icon}</span>
       <div>
-        <p className="text-2xl font-bold" style={{ color: highlight ? '#054653' : '#1A1A1A' }}>
-          {count}
-        </p>
+        <p className="text-xl font-bold" style={{ color: highlight ? '#054653' : '#1A1A1A' }}>{count}</p>
         <p className="text-xs font-medium text-gray-400">{label}</p>
       </div>
     </div>
