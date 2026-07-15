@@ -1,4 +1,5 @@
 import { computeScore, scoreBand, scoreBandColors } from '@/lib/appwrite/config';
+import { getProgressBand, getBandColors, BAND_LABELS } from '@/lib/progress-bands';
 
 interface Props {
   progressPercent: number;
@@ -8,10 +9,17 @@ interface Props {
   size?: 'sm' | 'md' | 'lg';
 }
 
-export function ScoreBadge({ progressPercent, weightTarget, scoreManual, showLabel = false, size = 'md' }: Props) {
-  const score = computeScore({ progressPercent, weightTarget, scoreManual });
-  const band = scoreBand(score);
-  const colors = scoreBandColors(band);
+export function ScoreBadge({
+  progressPercent,
+  weightTarget,
+  scoreManual,
+  showLabel = false,
+  size = 'md',
+}: Props) {
+  // Show as 0-100 percentage, not 0-25 weighted
+  const pct   = Math.max(0, Math.min(100, Math.round(progressPercent)));
+  const band  = getProgressBand(pct);
+  const colors = getBandColors(band);
 
   const sizeClasses = {
     sm: 'text-[10px] px-1.5 py-0.5',
@@ -19,32 +27,28 @@ export function ScoreBadge({ progressPercent, weightTarget, scoreManual, showLab
     lg: 'text-sm px-3 py-1.5',
   };
 
-  const bandLabel = {
-    critical: 'Critical',
-    at_risk: 'At Risk',
-    in_progress: 'In Progress',
-    on_track: 'On Track',
-  };
-
   return (
     <span
       className={`inline-flex items-center gap-1.5 rounded font-mono font-bold ${sizeClasses[size]}`}
-      style={{ backgroundColor: colors.bg, color: colors.text }}
+      style={{ backgroundColor: colors.bg, color: colors.badge }}
     >
-      <span>{score}/25</span>
+      <span>{pct}/100</span>
       {showLabel && (
-        <span className="font-normal opacity-70">— {bandLabel[band]}</span>
+        <span className="font-normal opacity-70">— {BAND_LABELS[band]}</span>
       )}
     </span>
   );
 }
 
-/** A horizontal color bar showing the score visually */
-export function ScoreBar({ progressPercent, weightTarget, scoreManual, height = 4 }: Omit<Props, 'showLabel' | 'size'> & { height?: number }) {
-  const score = computeScore({ progressPercent, weightTarget, scoreManual });
-  const band = scoreBand(score);
-  const colors = scoreBandColors(band);
-  const pct = (score / 25) * 100;
+export function ScoreBar({
+  progressPercent,
+  weightTarget,
+  scoreManual,
+  height = 4,
+}: Omit<Props, 'showLabel' | 'size'> & { height?: number }) {
+  const pct    = Math.max(0, Math.min(100, progressPercent));
+  const band   = getProgressBand(pct);
+  const colors = getBandColors(band);
 
   return (
     <div className="flex items-center gap-2">
@@ -54,8 +58,8 @@ export function ScoreBar({ progressPercent, weightTarget, scoreManual, height = 
           style={{ width: `${pct}%`, height, backgroundColor: colors.bar }}
         />
       </div>
-      <span className="w-12 font-mono text-[10px] font-bold" style={{ color: colors.text }}>
-        {score}/25
+      <span className="w-12 font-mono text-[10px] font-bold" style={{ color: colors.badge }}>
+        {pct}/100
       </span>
     </div>
   );

@@ -30,8 +30,6 @@ export default function LoginPage() {
       router.replace('/dashboard');
     } catch (err: any) {
       if (err?.message?.includes('session is active')) {
-        // Someone else's session is still open in this browser. Clear it and
-        // retry automatically instead of leaving the person stuck.
         try {
           await account.deleteSession('current');
           await login(email, password);
@@ -73,14 +71,15 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={busy}
-          className="w-full rounded-sm bg-ink py-3 font-mono text-sm uppercase tracking-wider text-parchment transition hover:bg-inkdeep disabled:opacity-50"
+          className="w-full rounded-sm py-3 font-mono text-sm uppercase tracking-wider text-white transition disabled:opacity-50"
+          style={{ backgroundColor: '#054653' }}
         >
           {busy ? 'Signing in…' : 'Sign in'}
         </button>
       </form>
       <p className="mt-6 text-sm text-charcoal/60">
         New here?{' '}
-        <Link href="/signup" className="font-medium text-clay underline">
+        <Link href="/signup" className="font-medium underline" style={{ color: '#054653' }}>
           Request access
         </Link>
       </p>

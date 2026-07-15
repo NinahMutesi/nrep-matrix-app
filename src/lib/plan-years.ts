@@ -1,8 +1,3 @@
-/**
- * The NREP Strategic Plan runs 2023-2028 in Uganda fiscal years (July-June).
- * Year 1 = 2023/24, Year 2 = 2024/25, ... Year 5 = 2027/28.
- * Anything beyond Year 5 keeps extrapolating the same pattern.
- */
 export const PLAN_START_YEAR = 2023;
 
 export function fiscalYearLabel(yearNumber: number): string {

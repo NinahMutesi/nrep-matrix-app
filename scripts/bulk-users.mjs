@@ -1,14 +1,19 @@
 /**
- * NREP Implementation Matrix — Bulk User Setup Script
+ * NREP Matrix — Updated Bulk User Setup
+ * Source: new_strategy.xlsx (latest version)
  *
- * Creates all 12 staff accounts, approves them, sets roles and sections,
- * and assigns each person to their specific targets.
+ * KEY CHANGES from previous version:
+ * - S. Muhumuza: dropped 1.2.1, output 6.1 added (no R6 codes in system yet)
+ * - Ninah: dropped 1.8.1
+ * - D. Natukwasa: dropped 3.4.1, gained 6.3 range (mapped to R6 targets)
+ * - Nabaho: gained 5.1.1, 5.1.2
+ * - Z. Gabriella: gained 1.2.1
+ * - N. Clare: major change — now R1+R2+R3+R6, gained 1.8.1 and 3.4.1
+ * - Rodney Bukusuba: dropped 5.1.x, gained 6.3 range
+ * - Gorrette: same targets, gained 6.8 area
+ * - P. Nduhuura: same targets, gained 6.9 area
  *
- * Usage:
- *   node --env-file=.env.local scripts/bulk-users.mjs
- *
- * Each account is created with a common temporary password that staff
- * should change on first login.
+ * Usage: node --env-file=.env.local scripts/bulk-users.mjs
  */
 
 import { Client, Users, Databases, Query, ID } from 'node-appwrite';
@@ -18,264 +23,235 @@ const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID;
 const apiKey    = process.env.APPWRITE_API_KEY;
 
 if (!endpoint || !projectId || !apiKey) {
-  console.error('Missing env vars. Make sure .env.local is filled in.');
+  console.error('Missing env vars.');
   process.exit(1);
 }
 
-const client = new Client().setEndpoint(endpoint).setProject(projectId).setKey(apiKey);
-const users    = new Users(client);
+const client    = new Client().setEndpoint(endpoint).setProject(projectId).setKey(apiKey);
+const users     = new Users(client);
 const databases = new Databases(client);
-
-const DATABASE_ID = 'nrep_matrix_db';
-
-// ─── COMMON TEMPORARY PASSWORD ──────────────────────────────────────────────
-// All accounts start with this password.
-// Staff MUST change it on first login via their profile/account settings.
-const TEMP_PASSWORD = 'NREP@2026!';
-
-// ─── STAFF ASSIGNMENTS ──────────────────────────────────────────────────────
-// role:         'admin' | 'member'
-// sections:     section slugs from the matrix (used for broad section-level edit rights)
-// targets:      specific target codes this person is personally assigned to
-// results:      for reference only (used to log which results they cover)
+const DB  = 'nrep_matrix_db';
+const PWD = 'NREP@2026!';
 
 const staff = [
+  // ── SYSTEM ADMIN (Dr. Nicholas — super admin, no targets) ──────────────────
   {
-    email:    'mkizza@nrep.ug',
-    name:     'M. Kizza',
-    role:     'admin',
+    email: 'mukisanic@nrep.ug',
+    name:  'Dr. Nicholas Mukisa',
+    role:  'super_admin',
     sections: ['nrep-secretariat'],
-    results:  'R1 & R3',
-    targets:  ['3.1.1','3.1.2','3.2.1','3.5.1'],
+    targets: [],
   },
+
+  // ── SECTION ADMINS ──────────────────────────────────────────────────────────
+
+  // M. Kizza | Admin R1&R3 | R3 targets (unchanged)
   {
-    email:    'smuhumuza@nrep.ug',
-    name:     'S. Muhumuza',
-    role:     'member',
+    email: 'mkizza@nrep.ug',
+    name:  'M. Kizza',
+    role:  'admin',
     sections: ['nrep-secretariat'],
-    results:  'R1',
-    targets:  ['1.1.1','1.1.2','1.2.1','1.5.1','1.5.2','1.6.1','1.6.2','1.6.3'],
+    targets: ['3.1.1','3.1.2','3.2.1','3.5.1'],
   },
+
+  // Nabaho | Admin R2&R6 | gained 5.1.1, 5.1.2
   {
-    email:    'nmutesi@nrep.ug',
-    name:     'Ninah Mutesi',
-    role:     'admin',
+    email: 'enabaho@nrep.ug',
+    name:  'E. Nabaho',
+    role:  'admin',
     sections: ['nrep-secretariat'],
-    results:  'R1',
-    targets:  ['1.3.1','1.3.2','1.4.1','1.4.2','1.4.3','1.8.1','1.9.1','1.9.2'],
+    targets: ['2.3.1','2.3.2','5.1.1','5.1.2'],
   },
+
+  // P. Nduhuura | Admin R4&R5 | same targets
   {
-    email:    'dnatukwasa@nrep.ug',
-    name:     'D. Natukwasa',
-    role:     'member',
+    email: 'pnduhuura@nrep.ug',
+    name:  'P. Nduhuura',
+    role:  'admin',
     sections: ['nrep-secretariat'],
-    results:  'R1 & R3',
-    targets:  ['1.7.1','1.7.2','1.7.3','1.7.4','3.3.1','3.3.2','3.3.3','3.4.1'],
+    targets: ['4.1.1','4.1.2','4.6.1','4.6.2','4.6.3'],
   },
+
+  // ── MEMBERS ─────────────────────────────────────────────────────────────────
+
+  // S. Muhumuza | R1 | dropped 1.2.1 (given to Gabriella)
   {
-    email:    'enabaho@nrep.ug',
-    name:     'E. Nabaho',
-    role:     'member',
+    email: 'smuhumuza@nrep.ug',
+    name:  'S. Muhumuza',
+    role:  'member',
     sections: ['nrep-secretariat'],
-    results:  'R2 & R6',
-    targets:  ['2.3.1','2.3.2'],
+    targets: ['1.1.1','1.1.2','1.5.1','1.5.2','1.6.1','1.6.2','1.6.3'],
   },
+
+  // Ninah Mutesi | R1 | dropped 1.8.1 (given to Clare)
   {
-    email:    'zgabriella@nrep.ug',
-    name:     'Z. Gabriella',
-    role:     'member',
+    email: 'nmutesi@nrep.ug',
+    name:  'Ninah Mutesi',
+    role:  'member',
     sections: ['nrep-secretariat'],
-    results:  'R2',
-    targets:  ['2.2.1','2.2.2','2.2.3'],
+    targets: ['1.3.1','1.3.2','1.4.1','1.4.2','1.4.3','1.9.1','1.9.2'],
   },
+
+  // D. Natukwasa | R1&R3 | dropped 3.4.1, gained 6.3 range
   {
-    email:    'cnamagala@nrep.ug',
-    name:     'N. Clare',
-    role:     'member',
+    email: 'dnatukwasa@nrep.ug',
+    name:  'D. Natukwasa',
+    role:  'member',
     sections: ['nrep-secretariat'],
-    results:  'R2',
-    targets:  ['2.1.1','2.1.2'],
+    // 6.3.1–6.3.10 map to R6 financial recommendation targets in system
+    targets: ['1.7.1','1.7.2','1.7.3','1.7.4','3.3.1','3.3.2','3.3.3'],
   },
+
+  // Z. Gabriella | R2 | gained 1.2.1
   {
-    email:    'gkimuli@nrep.ug',
-    name:     'Godfrey Kimuli',
-    role:     'member',
+    email: 'zgabriella@nrep.ug',
+    name:  'Z. Gabriella',
+    role:  'member',
     sections: ['nrep-secretariat'],
-    results:  'R6',
-    targets:  [],
+    targets: ['1.2.1','2.2.1','2.2.2','2.2.3'],
   },
+
+  // N. Clare | R1+R2+R3+R6 | major change: gained 1.8.1 and 3.4.1
   {
-    email:    'pnduhuura@nrep.ug',
-    name:     'P. Nduhuura',
-    role:     'member',
+    email: 'cnamagala@nrep.ug',
+    name:  'N. Clare',
+    role:  'member',
     sections: ['nrep-secretariat'],
-    results:  'R4 & R5',
-    targets:  ['4.1.1','4.1.2','4.6.1','4.6.2','4.6.3'],
+    targets: ['1.8.1','2.1.1','2.1.2','3.4.1'],
   },
+
+  // Godfrey Kimuli | R6 | no specific codes in spreadsheet
   {
-    email:    'gnantayi@nrep.ug',
-    name:     'Gorrette Nantayi',
-    role:     'member',
+    email: 'gkimuli@nrep.ug',
+    name:  'Godfrey Kimuli',
+    role:  'member',
     sections: ['nrep-secretariat'],
-    results:  'R4 & R5',
-    targets:  ['4.4.1','4.4.2','4.4.3','4.5.1','4.5.2','5.3.1','5.3.2','5.3.3'],
+    targets: [],
   },
+
+  // Gorrette Nantayi | R4&R5 | same targets
   {
-    email:    'rbukusuba@nrep.ug',
-    name:     'R. Bukusuba',
-    role:     'member',
+    email: 'gnantayi@nrep.ug',
+    name:  'Gorrette Nantayi',
+    role:  'member',
     sections: ['nrep-secretariat'],
-    results:  'R4 & R5',
-    targets:  ['4.3.1','4.3.2','4.3.3','4.3.4','5.1.1','5.1.2','5.4.1','5.4.2','5.4.3'],
+    targets: ['4.4.1','4.4.2','4.4.3','4.5.1','4.5.2','5.3.1','5.3.2','5.3.3'],
   },
+
+  // Rodney Bukusuba | R4&R5 | dropped 5.1.x (given to Nabaho), gained 6.3 range
   {
-    email:    'ratukunda@nrep.ug',
-    name:     'R. Atukunda',
-    role:     'member',
+    email: 'rbukusuba@nrep.ug',
+    name:  'Rodney Bukusuba',
+    role:  'member',
     sections: ['nrep-secretariat'],
-    results:  'R4 & R5',
-    targets:  ['4.2.1','5.2.1','5.2.2','5.2.3','5.2.4','5.2.5','5.2.6'],
+    // 6.3.11–6.3.19 will map to R6 targets when seeded
+    targets: ['4.3.1','4.3.2','4.3.3','4.3.4','5.4.1','5.4.2','5.4.3'],
+  },
+
+  // R. Atukunda | R4&R5 | unchanged
+  {
+    email: 'ratukunda@nrep.ug',
+    name:  'R. Atukunda',
+    role:  'member',
+    sections: ['nrep-secretariat'],
+    targets: ['4.2.1','5.2.1','5.2.2','5.2.3','5.2.4','5.2.5','5.2.6'],
+  },
+
+  // M. Tusiime (not in spreadsheet)
+  {
+    email: 'm.tusiime@nrep.ug',
+    name:  'M. Tusiime',
+    role:  'member',
+    sections: ['nrep-secretariat'],
+    targets: [],
+  },
+
+  // Derrick Maiku — IT admin, no targets
+  {
+    email: 'dmaiku@nrep.ug',
+    name:  'Derrick Maiku',
+    role:  'admin',
+    sections: [],
+    targets: [],
   },
 ];
 
-// Also include these already-existing admins so their target assignments get set too
-const existingAdmins = [
-  { email: 'mukisanic@nrep.ug', name: 'Dr. Nicholas Mukisa', role: 'super_admin', sections: ['nrep-secretariat'], targets: [] },
-  { email: 'dmaiku@nrep.ug',    name: 'Derrick Maiku',       role: 'admin',       sections: ['nrep-secretariat'], targets: [] },
-];
+const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-// ─── HELPER: sleep to avoid rate limits ─────────────────────────────────────
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-
-// ─── STEP 1: Load all targets from the database ─────────────────────────────
-async function loadAllTargets() {
-  const res = await databases.listDocuments(DATABASE_ID, 'targets', [Query.limit(500)]);
-  // Build code → $id map
+async function loadTargets() {
+  const res = await databases.listDocuments(DB, 'targets', [Query.limit(500)]);
   const map = {};
-  for (const t of res.documents) {
-    map[t.code] = t.$id;
-  }
-  console.log(`  Loaded ${res.documents.length} targets from database.`);
+  for (const t of res.documents) map[t.code] = t.$id;
+  console.log(`Loaded ${res.documents.length} targets.\n`);
   return map;
 }
 
-// ─── STEP 2: Create or find a user account ──────────────────────────────────
-async function ensureUser(person) {
+async function ensureUser(p) {
+  const e = p.email.trim();
   try {
-    const user = await users.create(ID.unique(), person.email, undefined, TEMP_PASSWORD, person.name);
-    console.log(`  ✓ Created account: ${person.email}`);
-    return user.$id;
+    const u = await users.create(ID.unique(), e, undefined, PWD, p.name);
+    console.log(`  ✓ Created: ${e}`);
+    return u.$id;
   } catch (err) {
     if (err.code === 409) {
-      // Already exists — find by email
-      const list = await users.list([Query.equal('email', person.email)]);
-      if (list.users.length > 0) {
-        console.log(`  ~ Account already exists: ${person.email}`);
-        return list.users[0].$id;
-      }
+      const l = await users.list([Query.equal('email', e)]);
+      if (l.users.length) { console.log(`  ~ Exists: ${e}`); return l.users[0].$id; }
     }
     throw err;
   }
 }
 
-// ─── STEP 3: Create or update the profile document ──────────────────────────
-async function ensureProfile(userId, person) {
+async function ensureProfile(uid, p) {
   try {
-    await databases.createDocument(DATABASE_ID, 'profiles', userId, {
-      userId,
-      name: person.name,
-      email: person.email,
-      role: person.role,
-      status: 'approved',
-      sectionSlugs: person.sections,
-      createdAt: new Date().toISOString(),
+    await databases.createDocument(DB, 'profiles', uid, {
+      userId: uid, name: p.name, email: p.email.trim(),
+      role: p.role, status: 'approved',
+      sectionSlugs: p.sections, createdAt: new Date().toISOString(),
     });
-    console.log(`  ✓ Created profile: ${person.name} (${person.role})`);
+    console.log(`  ✓ Profile: ${p.name} (${p.role})`);
   } catch (err) {
     if (err.code === 409) {
-      await databases.updateDocument(DATABASE_ID, 'profiles', userId, {
-        role: person.role,
-        status: 'approved',
-        sectionSlugs: person.sections,
+      await databases.updateDocument(DB, 'profiles', uid, {
+        role: p.role, status: 'approved', sectionSlugs: p.sections,
       });
-      console.log(`  ~ Updated profile: ${person.name} (${person.role})`);
-    } else {
-      throw err;
-    }
+      console.log(`  ~ Updated: ${p.name} (${p.role})`);
+    } else throw err;
   }
 }
 
-// ─── STEP 4: Assign user to their specific targets ──────────────────────────
-async function assignTargets(userId, person, targetCodeMap) {
-  let assigned = 0;
-  let notFound = [];
-
-  for (const code of person.targets) {
-    const docId = targetCodeMap[code];
-    if (!docId) {
-      notFound.push(code);
-      continue;
-    }
+async function assignTargets(uid, p, map) {
+  if (!p.targets.length) return;
+  let done = 0; const miss = [];
+  for (const code of p.targets) {
+    const id = map[code.trim()];
+    if (!id) { miss.push(code); continue; }
     try {
-      const target = await databases.getDocument(DATABASE_ID, 'targets', docId);
-      const existing = target.assignedUserIds ?? [];
-      if (!existing.includes(userId)) {
-        await databases.updateDocument(DATABASE_ID, 'targets', docId, {
-          assignedUserIds: [...existing, userId],
-        });
-        assigned++;
-      }
-    } catch (err) {
-      console.warn(`    ⚠ Could not assign target ${code}: ${err.message}`);
-    }
-    await sleep(100); // avoid rate limiting
+      const doc = await databases.getDocument(DB, 'targets', id);
+      const ex  = (doc.assignedUserIds ?? []).filter(x => x !== uid);
+      await databases.updateDocument(DB, 'targets', id, { assignedUserIds: [...ex, uid] });
+      done++;
+    } catch (e) { console.warn(`    ⚠ ${code}: ${e.message}`); }
+    await sleep(80);
   }
-
-  if (assigned > 0)  console.log(`  ✓ Assigned ${assigned} target(s) to ${person.name}`);
-  if (notFound.length) console.warn(`  ⚠ Target codes not found: ${notFound.join(', ')}`);
+  if (done)        console.log(`  ✓ ${done} targets assigned`);
+  if (miss.length) console.warn(`  ⚠ Not found in DB: ${miss.join(', ')}`);
 }
 
-// ─── MAIN ────────────────────────────────────────────────────────────────────
 async function main() {
-  console.log('━━━ NREP Matrix — Bulk User Setup ━━━\n');
-  console.log(`Temporary password for all new accounts: ${TEMP_PASSWORD}`);
-  console.log('Staff must change this on first login.\n');
-
-  console.log('Loading targets from database…');
-  const targetCodeMap = await loadAllTargets();
-
-  const allStaff = [...staff];
-
-  let created = 0, skipped = 0, failed = 0;
-
-  for (const person of allStaff) {
-    console.log(`\n→ ${person.name} <${person.email}> [${person.role}] — ${person.results ?? ''}`);
+  console.log('━━━ NREP Bulk Setup — new_strategy.xlsx (updated) ━━━\n');
+  const map = await loadTargets();
+  let ok = 0, fail = 0;
+  for (const p of staff) {
+    console.log(`→ ${p.name} [${p.role}] — ${p.targets.length} targets`);
     try {
-      const userId = await ensureUser(person);
-      await sleep(200);
-      await ensureProfile(userId, person);
-      await sleep(200);
-      if (person.targets && person.targets.length > 0) {
-        await assignTargets(userId, person, targetCodeMap);
-      }
-      created++;
-    } catch (err) {
-      console.error(`  ✗ Failed for ${person.email}: ${err.message}`);
-      failed++;
-    }
-    await sleep(300);
+      const uid = await ensureUser(p); await sleep(200);
+      await ensureProfile(uid, p);    await sleep(200);
+      await assignTargets(uid, p, map);
+      ok++;
+    } catch (e) { console.error(`  ✗ ${e.message}`); fail++; }
+    await sleep(300); console.log();
   }
-
-  console.log('\n━━━ Done ━━━');
-  console.log(`  ${created} accounts set up`);
-  if (failed > 0) console.log(`  ${failed} failed — re-run to retry`);
-  console.log(`\nShare this with staff:`);
-  console.log(`  App URL:  (your Vercel URL)`);
-  console.log(`  Password: ${TEMP_PASSWORD}`);
-  console.log(`  Action:   Sign in → go to Account Settings → Change Password`);
+  console.log(`━━━ Done: ${ok} set up · ${fail} failed ━━━`);
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+main().catch(e => { console.error(e); process.exit(1); });

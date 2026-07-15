@@ -13,21 +13,7 @@ body {
   color: #262420;
 }
 
-/* Card — shared rounded style used across all cards */
-.card {
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-/* Hairline rule */
-.rule {
-  border-top: 1px solid #D8CFB8;
-}
-
-.seal {
-  border-radius: 50%;
-}
-
+/* Auth input shared style */
 .auth-input {
   width: 100%;
   border: 1px solid #D8CFB8;
@@ -35,15 +21,26 @@ body {
   padding: 0.65rem 0.75rem;
   font-size: 0.9rem;
   color: #262420;
+  border-radius: 4px;
 }
 .auth-input:focus {
-  outline: 2px solid #D98E2B;
+  outline: 2px solid #054653;
   outline-offset: 1px;
 }
 
+/* Card — shared rounded style */
+.card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.rule {
+  border-top: 1px solid #D8CFB8;
+}
+
 ::selection {
-  background: #D98E2B;
-  color: #16322A;
+  background: #054653;
+  color: #EEF3F5;
 }
 
 @media (prefers-reduced-motion: reduce) {

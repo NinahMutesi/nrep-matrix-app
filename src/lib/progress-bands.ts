@@ -1,29 +1,47 @@
 /**
- * Progress-percentage based color bands (0–100%)
- * Used for cards, badges, and borders throughout the dashboard.
+ * Score bands — 0 to 100 in increments of 20, then Exceptional above 100.
  *
- *  0–25%   Very Poor  — Red
- * 26–50%   Poor       — Orange
- * 51–75%   Fair       — Amber
- * 76–100%  Good       — Green (#054653 teal accent on borders)
+ *   0–20   Very Poor   🔴
+ *  21–40   Poor        🟠
+ *  41–60   Fair        🟡
+ *  61–80   Good        🟢
+ *  81–100  Very Good   🔵
+ *  101+    Exceptional ⭐
  */
 
-export type ProgressBand = 'very_poor' | 'poor' | 'fair' | 'good' | 'exceptional';
+export type ProgressBand =
+  | 'very_poor'
+  | 'poor'
+  | 'fair'
+  | 'good'
+  | 'very_good'
+  | 'exceptional';
 
 export const BAND_LABELS: Record<ProgressBand, string> = {
   very_poor:   'Very Poor',
   poor:        'Poor',
   fair:        'Fair',
   good:        'Good',
+  very_good:   'Very Good',
   exceptional: 'Exceptional',
 };
 
-export function getProgressBand(pct: number): ProgressBand {
-  if (pct > 100) return 'exceptional';
-  if (pct <= 25)  return 'very_poor';
-  if (pct <= 50)  return 'poor';
-  if (pct <= 75)  return 'fair';
-  return 'good';
+export const BAND_RANGES: Record<ProgressBand, string> = {
+  very_poor:   '0–20',
+  poor:        '21–40',
+  fair:        '41–60',
+  good:        '61–80',
+  very_good:   '81–100',
+  exceptional: '101+',
+};
+
+export function getProgressBand(score: number): ProgressBand {
+  if (score > 100) return 'exceptional';
+  if (score >= 81)  return 'very_good';
+  if (score >= 61)  return 'good';
+  if (score >= 41)  return 'fair';
+  if (score >= 21)  return 'poor';
+  return 'very_poor';
 }
 
 export interface BandColors {
@@ -43,12 +61,19 @@ export function getBandColors(band: ProgressBand): BandColors {
     case 'fair':
       return { bg: '#FFFBEB', text: '#92400E', border: '#F59E0B', bar: '#F59E0B', badge: '#D97706' };
     case 'good':
-      return { bg: '#ECFDF5', text: '#065F46', border: '#054653', bar: '#059669', badge: '#054653' };
+      return { bg: '#ECFDF5', text: '#065F46', border: '#059669', bar: '#059669', badge: '#059669' };
+    case 'very_good':
+      return { bg: '#EEF6F7', text: '#054653', border: '#054653', bar: '#054653', badge: '#054653' };
     case 'exceptional':
-      return { bg: '#FDF4E7', text: '#7C4D00', border: '#D98E2B', bar: '#D98E2B', badge: '#92400E' };
+      return { bg: '#FDF4E7', text: '#92400E', border: '#D98E2B', bar: '#D98E2B', badge: '#D97706' };
   }
 }
 
-export function getPctColors(pct: number): BandColors {
-  return getBandColors(getProgressBand(pct));
+export function getPctColors(score: number): BandColors {
+  return getBandColors(getProgressBand(score));
+}
+
+/** For the progress bar visual — cap at 100% width, exceptional fills fully */
+export function getBarWidth(score: number): number {
+  return Math.min(100, score);
 }
