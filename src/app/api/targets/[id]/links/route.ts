@@ -11,7 +11,7 @@ function encodeLink(url: string, title: string) {
   return `[LINK] ${url.trim()} | ${title.trim()}`;
 }
 
-export function decodeLink(body: string) {
+function decodeLink(body: string) {
   const raw = body.replace('[LINK] ', '');
   const idx = raw.indexOf(' | ');
   if (idx === -1) return { url: raw, title: raw };

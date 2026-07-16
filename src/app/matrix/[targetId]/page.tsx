@@ -25,10 +25,10 @@ export default function TargetDetailPage() {
 }
 
 function TargetDetailPageInner() {
-  const params       = useParams<{ targetId: string }>();
+  const params = useParams<{ targetId: string }>();
   const searchParams = useSearchParams();
-  const router       = useRouter();
-  const { profile }  = useAuth();
+  const router = useRouter();
+  const { profile } = useAuth();
 
   const [target,  setTarget]  = useState<TargetDoc | null>(null);
   const [output,  setOutput]  = useState<OutputDoc | null>(null);
@@ -70,20 +70,13 @@ function TargetDetailPageInner() {
         links:    allComments.filter((c: any) =>  c.body?.startsWith('[LINK] ')).length,
         reports:  allReports.filter((r: any)  => !r.description?.startsWith('year:')).length,
       });
-    } catch { /* silent */ }
+    } catch { }
   }, [params.targetId]);
 
-  useEffect(() => {
-    loadTarget();
-    refreshCounts();
-  }, [loadTarget, refreshCounts]);
+  useEffect(() => { loadTarget(); refreshCounts(); }, [loadTarget, refreshCounts]);
 
   if (loading || !target) {
-    return (
-      <AppShell>
-        <div className="px-8 py-10 text-sm text-gray-400">Loading task…</div>
-      </AppShell>
-    );
+    return <AppShell><div className="px-8 py-10 text-sm text-gray-400">Loading task…</div></AppShell>;
   }
 
   const editable         = canEditTarget(profile, target);
@@ -94,35 +87,29 @@ function TargetDetailPageInner() {
   return (
     <AppShell>
       <div className="mx-auto max-w-4xl px-8 py-10">
-
-        {/* Back */}
         <button onClick={() => router.push(backHref)}
           className="mb-4 text-sm font-medium text-gray-500 hover:text-gray-800">
           {backLabel}
         </button>
 
-        {/* Header */}
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-sm font-bold uppercase tracking-wider" style={{ color: '#054653' }}>
               {result?.code} · Output {output?.code} · Target {target.code}
             </p>
-            <h1 className="mt-1 font-display text-2xl font-bold text-gray-900">
-              {target.description}
-            </h1>
+            <h1 className="mt-1 font-display text-2xl font-bold text-gray-900">{target.description}</h1>
             <p className="mt-1 text-sm text-gray-500">
               <strong>Lead org:</strong> {target.leadOrg}
               {target.timeline && <> · <strong>Timeline:</strong> {target.timeline}</>}
               {editable
                 ? <span className="ml-2 rounded px-2 py-0.5 text-xs font-bold text-white" style={{ backgroundColor: '#054653' }}>You can edit</span>
-                : <span className="ml-2 rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500">Read-only</span>
-              }
+                : <span className="ml-2 rounded bg-gray-100 px-2 py-0.5 text-xs text-gray-500">Read-only</span>}
             </p>
           </div>
           <StatusBadge status={target.status} />
         </div>
 
-        {/* Activity summary — 4 counts now including links */}
+        {/* Activity summary */}
         <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <SummaryCard icon="💬" count={counts.comments} label="Comments" />
           <SummaryCard icon="✅" count={counts.reviews}  label="Admin reviews" highlight={counts.reviews > 0} />
@@ -131,29 +118,24 @@ function TargetDetailPageInner() {
         </div>
 
         {/* Performance score */}
-        <div className="mt-5 overflow-hidden rounded-lg border-l-4 bg-white p-4 shadow-sm"
-          style={{ borderLeftColor: '#EF4444' }}>
+        <div className="mt-5 overflow-hidden rounded-lg border-l-4 bg-white p-4 shadow-sm" style={{ borderLeftColor: '#EF4444' }}>
           <div className="flex items-center justify-between">
             <p className="text-sm font-bold uppercase tracking-wider text-gray-500">Performance Score</p>
-            <ScoreBadge
-              progressPercent={target.progressPercent ?? 0}
-              weightTarget={target.weightTarget}
-              scoreManual={target.scoreManual}
-              showLabel size="md"
-            />
+            <ScoreBadge progressPercent={target.progressPercent ?? 0} weightTarget={target.weightTarget} scoreManual={target.scoreManual} showLabel size="md" />
           </div>
           <div className="mt-2">
             <ScoreBar progressPercent={target.progressPercent ?? 0} weightTarget={target.weightTarget} scoreManual={target.scoreManual} height={8} />
           </div>
         </div>
 
-        {/* Multi-rater scoring */}
+        {/* 3-way scoring: Member + Section Admin + Dr. Mukisa */}
         <div className="mt-4">
           <MultiRaterScore
             targetId={target.$id}
             target={{ ...target, resultCode: result?.code } as any}
             scoreUser={(target as any).scoreUser ?? null}
             scoreAdmin={(target as any).scoreAdmin ?? null}
+            scoreSuperAdmin={(target as any).scoreSuperAdmin ?? null}
             profile={profile}
             onUpdated={loadTarget}
           />
@@ -162,84 +144,47 @@ function TargetDetailPageInner() {
         {/* Progress update */}
         <div className="mt-4">
           {editable ? (
-            <ProgressControls
-              targetId={target.$id}
-              initialPercent={target.progressPercent ?? 0}
-              initialStatus={target.status}
-              isAdmin={adminUser}
-              onUpdated={(percent, status) => setTarget({ ...target, progressPercent: percent, status })}
-            />
+            <ProgressControls targetId={target.$id} initialPercent={target.progressPercent ?? 0}
+              initialStatus={target.status} isAdmin={adminUser}
+              onUpdated={(percent, status) => setTarget({ ...target, progressPercent: percent, status })} />
           ) : (
             <div className="rounded-lg border-2 bg-white p-5" style={{ borderColor: '#D0D8DA' }}>
               <p className="text-sm font-bold uppercase tracking-wider text-gray-500">Current Progress</p>
               <p className="mt-1 font-display text-2xl font-bold text-gray-900">{target.progressPercent ?? 0}%</p>
-              <p className="mt-1 text-sm text-gray-400">
-                Only members of <strong>{target.leadOrg}</strong> or an administrator can update this task.
-              </p>
+              <p className="mt-1 text-sm text-gray-400">Only members of <strong>{target.leadOrg}</strong> or an administrator can update this.</p>
             </div>
           )}
         </div>
 
-        {/* Yearly tracking */}
-        <div className="mt-4">
-          <YearlyTracker targetId={target.$id} canEdit={editable} />
-        </div>
+        <div className="mt-4"><YearlyTracker targetId={target.$id} canEdit={editable} /></div>
 
-        {/* R6 recommendation actions */}
         {result?.code === 'R6' && (
-          <div className="mt-4">
-            <RecActionTracker targetId={target.$id} canAdd={contributable} />
-          </div>
+          <div className="mt-4"><RecActionTracker targetId={target.$id} canAdd={contributable} /></div>
         )}
 
-        {/* Section admin review */}
         {(sectionAdminUser || adminUser) && (
           <div className="mt-4">
-            <SectionAdminReview
-              targetId={target.$id}
-              target={target}
-              profile={profile}
-              onReviewPosted={refreshCounts}
-            />
+            <SectionAdminReview targetId={target.$id} target={target} profile={profile} onReviewPosted={refreshCounts} />
           </div>
         )}
 
-        {/* Bottom grid: Comments | Reports & Screenshots */}
         <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-          <CommentThread
-            targetId={target.$id}
-            canPost={contributable}
-            onCommentPosted={refreshCounts}
-          />
-          <ReportUploader
-            targetId={target.$id}
-            canUpload={contributable}
-            onReportUploaded={refreshCounts}
-          />
+          <CommentThread targetId={target.$id} canPost={contributable} onCommentPosted={refreshCounts} />
+          <ReportUploader targetId={target.$id} canUpload={contributable} onReportUploaded={refreshCounts} />
         </div>
 
-        {/* Links section — full width below */}
         <div className="mt-4">
-          <LinksSection
-            targetId={target.$id}
-            canAdd={contributable}
-            onLinkAdded={refreshCounts}
-          />
+          <LinksSection targetId={target.$id} canAdd={contributable} onLinkAdded={refreshCounts} />
         </div>
-
       </div>
     </AppShell>
   );
 }
 
-function SummaryCard({ icon, count, label, highlight }: {
-  icon: string; count: number; label: string; highlight?: boolean;
-}) {
+function SummaryCard({ icon, count, label, highlight }: { icon: string; count: number; label: string; highlight?: boolean }) {
   return (
-    <div
-      className="flex items-center gap-3 rounded-lg border-2 bg-white px-3 py-3"
-      style={{ borderColor: highlight ? '#054653' : '#E5E7EB' }}
-    >
+    <div className="flex items-center gap-3 rounded-lg border-2 bg-white px-3 py-3"
+      style={{ borderColor: highlight ? '#054653' : '#E5E7EB' }}>
       <span className="text-xl">{icon}</span>
       <div>
         <p className="text-xl font-bold" style={{ color: highlight ? '#054653' : '#1A1A1A' }}>{count}</p>
