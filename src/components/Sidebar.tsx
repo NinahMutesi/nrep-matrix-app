@@ -5,12 +5,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import { isSuperAdmin, canAccessReviewQueue } from '@/lib/permissions';
 
-const NAV = [
-  { href: '/dashboard', label: 'Dashboard', code: '00' },
-  { href: '/matrix',    label: 'Matrix',    code: '01' },
-  { href: '/analysis',  label: 'Analysis',  code: '02' },
-];
-
 const BRAND = '#054653';
 const ACTIVE = '#D98E2B';
 
@@ -19,25 +13,35 @@ export function Sidebar() {
   const router   = useRouter();
   const { profile, logout } = useAuth();
 
-  const superAdmin    = isSuperAdmin(profile);
-  const showReviews   = canAccessReviewQueue(profile);
+  const superAdmin  = isSuperAdmin(profile);
+  const showReviews = canAccessReviewQueue(profile);
+  const isMember    = profile?.role === 'member';
 
   function navStyle(active: boolean) {
     return {
       backgroundColor: active ? ACTIVE : 'transparent',
-      color:           active ? '#16322A' : 'rgba(255,255,255,0.8)',
+      color:           active ? '#16322A' : 'rgba(255,255,255,0.82)',
       fontWeight:      active ? 600 : 400,
     };
   }
 
-  return (
-    <aside className="flex h-screen w-60 flex-col justify-between text-white"
-      style={{ backgroundColor: BRAND }}>
+  const NAV = [
+    { href: '/dashboard', label: 'Dashboard', code: '00' },
+    { href: '/matrix',    label: 'Matrix',    code: '01' },
+    { href: '/analysis',  label: 'Analysis',  code: '02' },
+  ];
 
+  return (
+    <aside
+      className="flex h-screen w-60 flex-col justify-between text-white"
+      style={{ backgroundColor: BRAND }}
+    >
       {/* Logo */}
       <div>
-        <div className="flex items-center gap-3 px-5 py-5"
-          style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+        <div
+          className="flex items-center gap-3 px-5 py-5"
+          style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}
+        >
           <img src="/nrep-logo.png" alt="NREP" className="h-9 w-9 object-contain" />
           <div>
             <p className="font-mono text-[10px] uppercase tracking-widest font-bold"
@@ -48,7 +52,7 @@ export function Sidebar() {
           </div>
         </div>
 
-        {/* Nav */}
+        {/* Nav links */}
         <nav className="mt-2 space-y-0.5 px-3">
           {NAV.map((item) => {
             const active = pathname.startsWith(item.href);
@@ -62,6 +66,16 @@ export function Sidebar() {
             );
           })}
 
+          {/* My Reviews — members only, shows admin reviews on their targets */}
+          {isMember && (
+            <Link href="/my-reviews"
+              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition"
+              style={navStyle(pathname.startsWith('/my-reviews'))}>
+              <span className="font-mono text-[10px] opacity-50">03</span>
+              My Reviews
+            </Link>
+          )}
+
           {/* Review Queue — section admins + super admin */}
           {showReviews && (
             <Link href="/admin/review"
@@ -72,7 +86,7 @@ export function Sidebar() {
             </Link>
           )}
 
-          {/* Admin panel — ONLY super_admin (Dr. Nicholas) */}
+          {/* Admin panel — super admin only */}
           {superAdmin && (
             <Link href="/admin"
               className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition"
@@ -97,7 +111,6 @@ export function Sidebar() {
               {profile?.role === 'super_admin' ? '★ Super Admin'
                 : profile?.role === 'admin' ? 'Section Admin'
                 : profile?.role}
-              {profile?.sectionSlugs?.length ? ` · ${profile.sectionSlugs.length} section(s)` : ''}
             </p>
           </div>
         </div>

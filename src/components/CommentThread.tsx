@@ -59,7 +59,7 @@ export function CommentThread({
     <div className="overflow-hidden rounded-lg border-2 bg-white" style={{ borderColor: '#D0D8DA' }}>
       <div className="px-4 py-3 border-b" style={{ borderColor: '#E5E7EB', backgroundColor: '#F8FAFB' }}>
         <p className="text-sm font-bold text-gray-700">Comments</p>
-        <p className="text-xs text-gray-400">Progress notes, blockers, next steps</p>
+        
       </div>
 
       <div className="p-4">
