@@ -13,6 +13,7 @@ export function Sidebar() {
   const { profile, logout } = useAuth();
   const adminUser = isAdmin(profile);
   const systemAdmin = isSystemAdmin(profile);
+  const sectionAdmin = adminUser && !systemAdmin;
   const showReviews = canAccessReviewQueue(profile);
   const isMember = profile?.role === 'member';
 
@@ -32,41 +33,78 @@ export function Sidebar() {
             <p className="text-xs font-semibold text-white leading-tight">Implementation Matrix</p>
           </div>
         </div>
+
         <nav className="mt-2 space-y-0.5 px-3">
-          {[
-            { href: '/dashboard', label: 'Dashboard', code: '00' },
-            { href: '/matrix', label: 'Matrix', code: '01' },
-            { href: '/analysis', label: 'Analysis', code: '02' },
-          ].map((item) => (
-            <Link key={item.href} href={item.href}
+          <Link href="/dashboard"
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition"
+            style={navStyle(pathname === '/dashboard' && !pathname.includes('mode'))}>
+            <span className="font-mono text-[10px] opacity-50">00</span>Dashboard
+          </Link>
+
+          <Link href="/matrix"
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition"
+            style={navStyle(pathname.startsWith('/matrix'))}>
+            <span className="font-mono text-[10px] opacity-50">01</span>Matrix
+          </Link>
+
+          <Link href="/analysis"
+            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition"
+            style={navStyle(pathname.startsWith('/analysis'))}>
+            <span className="font-mono text-[10px] opacity-50">02</span>Analysis
+          </Link>
+
+          {/* My Section — for members and section admins */}
+          {(isMember || sectionAdmin) && (
+            <Link href="/dashboard?mode=my_section"
               className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition"
-              style={navStyle(pathname.startsWith(item.href))}>
-              <span className="font-mono text-[10px] opacity-50">{item.code}</span>
-              {item.label}
+              style={navStyle(pathname.includes('mode=my_section'))}>
+              <span className="font-mono text-[10px] opacity-50">03</span>My Section
             </Link>
-          ))}
+          )}
+
+          {/* My Reviews — members only */}
           {isMember && (
             <Link href="/my-reviews"
               className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition"
               style={navStyle(pathname.startsWith('/my-reviews'))}>
-              <span className="font-mono text-[10px] opacity-50">03</span>
-              My Reviews
+              <span className="font-mono text-[10px] opacity-50">04</span>My Reviews
             </Link>
           )}
+
+          {/* Admin Overview — system admin (Dr. Mukisa) */}
+          {systemAdmin && (
+            <Link href="/dashboard?mode=my_section"
+              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition"
+              style={navStyle(pathname.includes('mode=my_section'))}>
+              <span className="font-mono text-[10px] opacity-50">03</span>Admin Overview
+            </Link>
+          )}
+
+          {/* Comments & Reviews — admins only */}
+          {adminUser && (
+            <Link href="/admin-comments"
+              className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition"
+              style={navStyle(pathname.startsWith('/admin-comments'))}>
+              <span className="font-mono text-[10px] opacity-50">{systemAdmin ? '04' : '04'}</span>
+              {systemAdmin ? 'All Comments' : 'Section Comments'}
+            </Link>
+          )}
+
+          {/* Review queue */}
           {showReviews && (
             <Link href="/admin/review"
               className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition"
               style={navStyle(pathname.startsWith('/admin/review'))}>
-              <span className="font-mono text-[10px] opacity-50">04</span>
-              Review queue
+              <span className="font-mono text-[10px] opacity-50">05</span>Review queue
             </Link>
           )}
+
+          {/* Admin panel */}
           {adminUser && (
             <Link href="/admin"
               className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition"
               style={navStyle(pathname === '/admin')}>
-              <span className="font-mono text-[10px] opacity-50">05</span>
-              Admin
+              <span className="font-mono text-[10px] opacity-50">06</span>Admin
             </Link>
           )}
         </nav>
