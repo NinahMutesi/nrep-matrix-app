@@ -21,6 +21,18 @@ export default function DashboardPage() {
 
 type DashMode = 'overview' | 'my_section';
 
+
+
+
+function SummaryTile({ label, value, color, bg }: { label: string; value: string; color?: string; bg?: string }) {
+  return (
+    <div className="bg-white px-4 py-3" style={{ borderRadius: '8px', border: '1px solid #D0D8DA', backgroundColor: bg ?? '#FFFFFF' }}>
+      <p className="font-mono text-[10px] uppercase tracking-wider text-charcoal/50">{label}</p>
+      <p className="mt-0.5 font-display text-2xl" style={color ? { color } : { color: '#16322A' }}>{value}</p>
+    </div>
+  );
+}
+
 function DashboardPageInner() {
   const { data, loading, error } = useMatrixData();
   const { profile } = useAuth();
@@ -232,5 +244,40 @@ function MySectionView({ targets, data, profile }: { targets: TargetDoc[]; data:
         })}
       </div>
     </div>
+  );
+}
+
+
+function ResultCard({ result, targets, summary }: { result: any; targets: any[]; summary: any }) {
+  const pct = averageProgress(targets.map((t) => t.progressPercent ?? 0));
+  const colors = getPctColors(pct);
+  const completed = targets.filter(t => t.status === 'completed').length;
+  const atRisk = targets.filter(t => t.status === 'at_risk' || t.status === 'delayed').length;
+  return (
+    <Link href={`/matrix?result=${result.$id}`}
+      className="block bg-white p-5 transition hover:shadow-md"
+      style={{ borderRadius: '10px', border: `1.5px solid ${colors.border}`, borderLeft: `4px solid #054653` }}>
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <p className="font-mono text-[10px] uppercase tracking-wider" style={{ color: '#054653' }}>{result.code}</p>
+          <h3 className="mt-0.5 font-display text-[15px] leading-snug text-ink line-clamp-2">{result.title}</h3>
+        </div>
+        <ProgressBadge percent={pct} showLabel={false} size="sm" />
+      </div>
+      <div className="mt-3"><ProgressBar percent={pct} height={6} /></div>
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex gap-3 font-mono text-[10px] text-charcoal/50">
+          <span>{targets.length} targets</span>
+          <span className="font-medium" style={{ color: '#054653' }}>{completed} done</span>
+          {atRisk > 0 && <span className="text-clay">{atRisk} at risk</span>}
+        </div>
+        <ProgressBadge percent={pct} showLabel size="xs" />
+      </div>
+      <div className="mt-2 border-t border-line pt-2 flex gap-3 font-mono text-[10px]">
+        <span style={{ color: '#054653' }}>▲ {summary.updated} recent</span>
+        {summary.stale > 0 && <span className="text-amber">{summary.stale} stale</span>}
+        {summary.noUpdate > 0 && <span className="text-charcoal/40">{summary.noUpdate} no update</span>}
+      </div>
+    </Link>
   );
 }
