@@ -13,6 +13,7 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { useAuth } from '@/lib/auth-context';
 import { isAdmin } from '@/lib/permissions';
 import type { ResultDoc, TargetDoc } from '@/types';
+import { AdminOverview } from '@/app/dashboard/AdminOverview';
 
 export default function DashboardPage() {
   return <Suspense fallback={null}><DashboardPageInner /></Suspense>;
