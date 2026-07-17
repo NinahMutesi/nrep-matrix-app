@@ -11,8 +11,7 @@ import { averageProgress } from '@/lib/progress';
 import { getPctColors, getBandColors, BAND_LABELS } from '@/lib/progress-bands';
 import { StatusBadge } from '@/components/StatusBadge';
 import { useAuth } from '@/lib/auth-context';
-import { isAdmin, isSuperAdmin } from '@/lib/permissions';
-import { authedFetch } from '@/lib/authed-fetch';
+import { isAdmin } from '@/lib/permissions';
 import type { ResultDoc, TargetDoc } from '@/types';
 
 export default function DashboardPage() {
@@ -28,28 +27,24 @@ function DashboardPageInner() {
   const modeFromUrl = searchParams.get('mode') as DashMode | null;
   const [mode, setMode] = useState<DashMode>(modeFromUrl === 'my_section' ? 'my_section' : 'overview');
 
-  const adminUser    = isAdmin(profile);
-  const superAdminUser = isSuperAdmin(profile);
+  const adminUser = isAdmin(profile);
   // System admin = admin with no sections (Dr. Mukisa, Derrick)
   const isSystemAdmin = adminUser && (!profile?.sectionSlugs || profile.sectionSlugs.length === 0);
 
   const myTargets = useMemo(() => {
     if (!data || !profile) return [];
-    if (isSystemAdmin) return data.targets; // system admin sees ALL targets
-    return data.targets.filter((t) =>
-      profile.sectionSlugs.includes(t.sectionSlug) ||
-      t.assignedUserIds.includes(profile.userId)
-    );
+    // System admin sees ALL targets
+    if (isSystemAdmin) return data.targets;
+    // Everyone else: ONLY targets where they are personally assigned
+    return data.targets.filter((t) => t.assignedUserIds.includes(profile.userId));
   }, [data, profile, isSystemAdmin]);
 
   const strategicResults = useMemo(() => data?.results.filter(r => r.code !== 'R6') ?? [], [data]);
   const r6 = useMemo(() => data?.results.find(r => r.code === 'R6'), [data]);
-
   const overallPct = useMemo(() => {
     if (!data) return 0;
     return averageProgress(data.targets.map((t) => t.progressPercent ?? 0));
   }, [data]);
-
   const overallColors = getPctColors(overallPct);
 
   const resultUpdateSummary = useMemo(() => {
@@ -61,14 +56,14 @@ function DashboardPageInner() {
       for (const t of rTargets) {
         if (!t.updatedAt) { noUpdate++; continue; }
         const days = Math.floor((Date.now() - new Date(t.updatedAt).getTime()) / 86400000);
-        if (days <= 30) updated++;
-        else if (days <= 90) stale++;
-        else noUpdate++;
+        if (days <= 30) updated++; else if (days <= 90) stale++; else noUpdate++;
       }
       map[result.$id] = { updated, stale, noUpdate };
     }
     return map;
   }, [data]);
+
+  const myTabLabel = isSystemAdmin ? 'Admin Overview' : 'My Section';
 
   return (
     <AppShell>
@@ -76,28 +71,26 @@ function DashboardPageInner() {
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-wider text-clay">NREP Strategic Plan 2023–2028</p>
-            <h1 className="mt-0.5 font-display text-3xl text-ink">
-              Welcome, {profile?.name?.split(' ')[0]}
-            </h1>
+            <h1 className="mt-0.5 font-display text-3xl text-ink">Welcome, {profile?.name?.split(' ')[0]}</h1>
           </div>
           {data && (
             <button onClick={() => exportMatrixCsv(data)}
-              className="border px-4 py-2 font-mono text-xs uppercase tracking-wider text-ink hover:text-white transition"
-              style={{ borderColor: '#054653' }}
+              className="border px-4 py-2 font-mono text-xs uppercase tracking-wider transition"
+              style={{ borderColor: '#054653', color: '#054653' }}
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#054653'; e.currentTarget.style.color = 'white'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#1A1A1A'; }}>
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#054653'; }}>
               Download full matrix
             </button>
           )}
         </div>
 
         {/* Mode toggle */}
-        <div className="mt-6 flex gap-0 border border-line w-fit">
+        <div className="mt-6 flex border border-line w-fit">
           {(['overview', 'my_section'] as DashMode[]).map((m) => (
             <button key={m} onClick={() => setMode(m)}
               className="px-4 py-2 font-mono text-xs uppercase tracking-wider transition"
               style={mode === m ? { backgroundColor: '#054653', color: 'white' } : { color: '#666' }}>
-              {m === 'overview' ? 'All Results' : isSystemAdmin ? 'Admin Overview' : 'My Section'}
+              {m === 'overview' ? 'All Results' : myTabLabel}
             </button>
           ))}
         </div>
@@ -118,12 +111,12 @@ function DashboardPageInner() {
             <div className="mt-4 flex flex-wrap items-center gap-3 bg-white px-4 py-2.5" style={{ borderRadius: '8px', border: '1px solid #D0D8DA' }}>
               <p className="font-mono text-[10px] uppercase tracking-wider text-charcoal/40">Performance bands:</p>
               {([
-                { range: '0–20',   label: 'Very Poor',      color: '#DC2626' },
-                { range: '21–40',  label: 'Poor',           color: '#EA580C' },
-                { range: '41–60',  label: 'Fair',           color: '#D97706' },
-                { range: '61–80',  label: 'Good',           color: '#059669' },
-                { range: '81–100', label: 'Very Good',      color: '#054653' },
-                { range: '101+',   label: 'Exceptional ⭐', color: '#D98E2B' },
+                { range: '0–20', label: 'Very Poor', color: '#DC2626' },
+                { range: '21–40', label: 'Poor', color: '#EA580C' },
+                { range: '41–60', label: 'Fair', color: '#D97706' },
+                { range: '61–80', label: 'Good', color: '#059669' },
+                { range: '81–100', label: 'Very Good', color: '#054653' },
+                { range: '101+', label: 'Exceptional ⭐', color: '#D98E2B' },
               ]).map(({ range, label, color }) => (
                 <span key={range} className="flex items-center gap-1.5 font-mono text-[10px]">
                   <span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: color }} />
@@ -156,7 +149,7 @@ function DashboardPageInner() {
 
         {data && mode === 'my_section' && (
           isSystemAdmin
-            ? <AdminOverview data={data} profile={profile} />
+            ? <AdminOverview data={data} />
             : <MySectionView targets={myTargets} data={data} profile={profile} />
         )}
       </div>
@@ -164,36 +157,14 @@ function DashboardPageInner() {
   );
 }
 
-/** Admin overview — shows all team activity and aggregations for Dr. Mukisa */
-function AdminOverview({ data, profile }: { data: any; profile: any }) {
-  const [recentActivity, setRecentActivity] = useState<any[]>([]);
-  const [loadingActivity, setLoadingActivity] = useState(true);
-
-  // Load recent comments/updates across all targets
-  useEffect(() => {
-    async function loadActivity() {
-      setLoadingActivity(true);
-      try {
-        // Get recently updated targets
-        const updated = [...data.targets]
-          .filter((t: any) => t.updatedAt)
-          .sort((a: any, b: any) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
-          .slice(0, 20);
-        setRecentActivity(updated);
-      } finally {
-        setLoadingActivity(false);
-      }
-    }
-    loadActivity();
-  }, [data]);
-
+/** Admin overview for Dr. Mukisa — aggregated team progress */
+function AdminOverview({ data }: { data: any }) {
   const overallPct = averageProgress(data.targets.map((t: any) => t.progressPercent ?? 0));
   const completed  = data.targets.filter((t: any) => t.status === 'completed').length;
   const atRisk     = data.targets.filter((t: any) => t.status === 'at_risk' || t.status === 'delayed').length;
-  const notStarted = data.targets.filter((t: any) => t.status === 'not_started').length;
   const inProgress = data.targets.filter((t: any) => t.status === 'in_progress' || t.status === 'on_track').length;
+  const notStarted = data.targets.filter((t: any) => t.status === 'not_started').length;
 
-  // Per-result breakdown
   const resultBreakdown = data.results.filter((r: any) => r.code !== 'R6').map((result: any) => {
     const targets = data.targets.filter((t: any) => t.resultId === result.$id);
     const pct     = averageProgress(targets.map((t: any) => t.progressPercent ?? 0));
@@ -202,22 +173,33 @@ function AdminOverview({ data, profile }: { data: any; profile: any }) {
     return { result, targets, pct, done, risk };
   });
 
+  // Recent activity — last updated targets
+  const recentTargets = [...data.targets]
+    .filter((t: any) => t.updatedAt)
+    .sort((a: any, b: any) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+    .slice(0, 15);
+
   return (
     <div className="mt-6">
-      {/* Overall summary */}
+      {/* System-wide summary */}
       <div className="mb-6 rounded-lg bg-white p-5" style={{ border: '2px solid #054653' }}>
-        <p className="font-mono text-[10px] uppercase tracking-wider" style={{ color: '#054653' }}>
-          Full system overview — all {data.targets.length} targets
+        <p className="text-xs font-bold uppercase tracking-wider mb-3" style={{ color: '#054653' }}>
+          Full system — {data.targets.length} targets across {data.results.filter((r:any) => r.code !== 'R6').length} results
         </p>
-        <div className="mt-3 grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <StatBox label="Overall progress" value={`${overallPct}%`} color="#054653" />
-          <StatBox label="Completed" value={String(completed)} color="#059669" />
-          <StatBox label="In progress" value={String(inProgress)} color="#D97706" />
-          <StatBox label="At risk" value={String(atRisk)} color="#DC2626" />
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 mb-4">
+          {[
+            { label: 'Overall', value: `${overallPct}%`, color: '#054653' },
+            { label: 'Completed', value: String(completed), color: '#059669' },
+            { label: 'In progress', value: String(inProgress), color: '#D97706' },
+            { label: 'At risk', value: String(atRisk), color: '#DC2626' },
+          ].map(({ label, value, color }) => (
+            <div key={label} className="rounded-lg border p-3 text-center" style={{ borderColor: '#E5E7EB' }}>
+              <p className="text-2xl font-bold" style={{ color }}>{value}</p>
+              <p className="font-mono text-[10px] uppercase tracking-wider text-gray-400">{label}</p>
+            </div>
+          ))}
         </div>
-        <div className="mt-3">
-          <ProgressBar percent={overallPct} height={10} />
-        </div>
+        <ProgressBar percent={overallPct} height={10} />
       </div>
 
       {/* Per-result breakdown */}
@@ -231,17 +213,16 @@ function AdminOverview({ data, profile }: { data: any; profile: any }) {
             <Link key={result.$id} href={`/matrix?result=${result.$id}`}
               className="flex items-center gap-4 rounded-lg bg-white px-4 py-3 transition hover:shadow-sm"
               style={{ border: `1.5px solid ${colors.border}`, borderLeft: '4px solid #054653' }}>
-              <div className="w-12 text-center">
-                <p className="font-mono text-xs font-bold" style={{ color: '#054653' }}>{result.code}</p>
-              </div>
+              <p className="w-8 font-mono text-xs font-bold shrink-0" style={{ color: '#054653' }}>{result.code}</p>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-800 line-clamp-1">{result.title}</p>
+                <p className="text-sm font-medium text-gray-800 truncate">{result.title}</p>
                 <ProgressBar percent={pct} height={4} />
               </div>
               <div className="shrink-0 text-right">
                 <ProgressBadge percent={pct} showLabel={false} size="sm" />
                 <p className="font-mono text-[10px] text-gray-400 mt-0.5">
-                  {done}/{targets.length} done {risk > 0 && <span className="text-red-500">· {risk} at risk</span>}
+                  {done}/{targets.length} done
+                  {risk > 0 && <span className="text-red-500"> · {risk} at risk</span>}
                 </p>
               </div>
             </Link>
@@ -249,30 +230,27 @@ function AdminOverview({ data, profile }: { data: any; profile: any }) {
         })}
       </div>
 
-      {/* Recent team activity */}
+      {/* Recent activity */}
       <p className="mb-3 font-mono text-xs font-bold uppercase tracking-wider" style={{ color: '#054653' }}>
         Recent team activity
       </p>
-      {loadingActivity && <p className="text-sm text-gray-400">Loading activity…</p>}
       <div className="space-y-2">
-        {recentActivity.map((t: any) => {
+        {recentTargets.length === 0 && (
+          <p className="text-sm text-gray-400 italic">No activity yet — team members have not started updating targets.</p>
+        )}
+        {recentTargets.map((t: any) => {
           const result = data.results.find((r: any) => r.$id === t.resultId);
-          const tc     = getPctColors(t.progressPercent ?? 0);
-          const days   = t.updatedAt
-            ? Math.floor((Date.now() - new Date(t.updatedAt).getTime()) / 86400000)
-            : null;
+          const tc = getPctColors(t.progressPercent ?? 0);
+          const days = t.updatedAt ? Math.floor((Date.now() - new Date(t.updatedAt).getTime()) / 86400000) : null;
           return (
             <Link key={t.$id} href={`/matrix/${t.$id}`}
               className="flex items-center justify-between gap-3 rounded-lg bg-white px-4 py-3 transition hover:shadow-sm"
               style={{ border: '1px solid #E5E7EB', borderLeft: '3px solid #054653' }}>
               <div className="min-w-0 flex-1">
-                <p className="font-mono text-[9px] uppercase tracking-wider text-gray-400">
-                  {result?.code} · Target {t.code}
-                </p>
+                <p className="font-mono text-[9px] uppercase tracking-wider text-gray-400">{result?.code} · Target {t.code}</p>
                 <p className="text-sm font-medium text-gray-800 line-clamp-1">{t.description}</p>
                 <p className="font-mono text-[10px] text-gray-400">
-                  {t.leadOrg}
-                  {t.updatedBy && ` · updated ${days === 0 ? 'today' : days === 1 ? 'yesterday' : `${days}d ago`}`}
+                  {t.leadOrg} {days !== null && `· ${days === 0 ? 'updated today' : days === 1 ? 'updated yesterday' : `updated ${days}d ago`}`}
                 </p>
               </div>
               <div className="flex shrink-0 items-center gap-2">
@@ -283,15 +261,6 @@ function AdminOverview({ data, profile }: { data: any; profile: any }) {
           );
         })}
       </div>
-    </div>
-  );
-}
-
-function StatBox({ label, value, color }: { label: string; value: string; color: string }) {
-  return (
-    <div className="text-center">
-      <p className="font-display text-2xl font-bold" style={{ color }}>{value}</p>
-      <p className="font-mono text-[10px] uppercase tracking-wider text-gray-400">{label}</p>
     </div>
   );
 }
@@ -310,7 +279,6 @@ function ResultCard({ result, targets, summary }: { result: ResultDoc; targets: 
   const colors  = getPctColors(pct);
   const completed = targets.filter(t => t.status === 'completed').length;
   const atRisk    = targets.filter(t => t.status === 'at_risk' || t.status === 'delayed').length;
-
   return (
     <Link href={`/matrix?result=${result.$id}`}
       className="block bg-white p-5 transition hover:shadow-md"
@@ -344,31 +312,49 @@ function MySectionView({ targets, data, profile }: { targets: TargetDoc[]; data:
   if (!targets.length) {
     return (
       <div className="mt-8 bg-white px-6 py-10 text-center" style={{ borderRadius: '10px', border: '1px solid #D0D8DA' }}>
-        <p className="font-display text-xl text-ink">No tasks assigned yet.</p>
-        <p className="mt-2 text-sm text-charcoal/60">An administrator will assign you to a section.</p>
+        <p className="text-4xl mb-3">📋</p>
+        <p className="font-display text-xl text-ink">No targets assigned to you yet.</p>
+        <p className="mt-2 text-sm text-charcoal/60">
+          Contact Dr. Mukisa or Ninah Mutesi to get your targets assigned.
+        </p>
       </div>
     );
   }
+
   const pct    = averageProgress(targets.map(t => t.progressPercent ?? 0));
   const colors = getPctColors(pct);
 
   return (
     <div className="mt-6">
+      {/* My section summary */}
       <div className="mb-5 bg-white p-5" style={{ borderRadius: '10px', border: `1.5px solid ${colors.border}`, borderLeft: '4px solid #054653' }}>
-        <p className="font-mono text-[10px] uppercase tracking-wider" style={{ color: '#054653' }}>Your section — {targets.length} targets</p>
+        <p className="font-mono text-[10px] uppercase tracking-wider" style={{ color: '#054653' }}>
+          Your assigned targets — {targets.length} total
+        </p>
         <div className="mt-2 flex flex-wrap items-center gap-6">
           <div>
             <p className="font-display text-3xl text-ink">{pct}%</p>
             <ProgressBadge percent={pct} showLabel size="sm" />
           </div>
           <div className="grid grid-cols-3 gap-4 font-mono text-xs">
-            <div><p className="font-bold" style={{ color: '#054653' }}>{targets.filter(t => t.status === 'completed').length}</p><p className="text-charcoal/50">Done</p></div>
-            <div><p className="font-bold text-clay">{targets.filter(t => t.status === 'at_risk' || t.status === 'delayed').length}</p><p className="text-charcoal/50">At risk</p></div>
-            <div><p className="font-bold text-charcoal/70">{targets.filter(t => t.status === 'not_started').length}</p><p className="text-charcoal/50">Not started</p></div>
+            <div>
+              <p className="font-bold" style={{ color: '#054653' }}>{targets.filter(t => t.status === 'completed').length}</p>
+              <p className="text-charcoal/50">Done</p>
+            </div>
+            <div>
+              <p className="font-bold text-clay">{targets.filter(t => t.status === 'at_risk' || t.status === 'delayed').length}</p>
+              <p className="text-charcoal/50">At risk</p>
+            </div>
+            <div>
+              <p className="font-bold text-charcoal/70">{targets.filter(t => t.status === 'not_started').length}</p>
+              <p className="text-charcoal/50">Not started</p>
+            </div>
           </div>
         </div>
         <div className="mt-3"><ProgressBar percent={pct} height={8} /></div>
       </div>
+
+      {/* Target list */}
       <div className="space-y-2">
         {targets.map((t) => {
           const output = data.outputs.find((o: any) => o.$id === t.outputId);
