@@ -3,12 +3,11 @@
 import { useState } from 'react';
 import { authedFetch } from '@/lib/authed-fetch';
 import { getProgressBand, getBandColors, BAND_LABELS, BAND_RANGES, getBarWidth } from '@/lib/progress-bands';
-import { canGiveMemberScore, canScoreTarget, isSuperAdmin, isAdmin } from '@/lib/permissions';
 import type { Profile, TargetDoc } from '@/types';
 
 interface Props {
   targetId: string;
-  target: TargetDoc;
+  target: TargetDoc & { resultCode?: string };
   scoreUser: number | null;
   scoreAdmin: number | null;
   scoreSuperAdmin: number | null;
@@ -16,13 +15,11 @@ interface Props {
   onUpdated: () => void;
 }
 
-function getSectionAdminName(resultCode: string | undefined): string {
-  if (!resultCode) return 'Section admin';
-  if (resultCode === 'R1' || resultCode === 'R3') return 'M. Kizza';
-  if (resultCode === 'R2' || resultCode === 'R6') return 'E. Nabaho';
-  if (resultCode === 'R4' || resultCode === 'R5') return 'P. Nduhuura';
-  return 'Section admin';
-}
+const RESULT_SECTION_ADMINS: Record<string, string> = {
+  R1: 'mkizza@nrep.ug', R3: 'mkizza@nrep.ug',
+  R2: 'enabaho@nrep.ug', R6: 'enabaho@nrep.ug',
+  R4: 'pnduhuura@nrep.ug', R5: 'pnduhuura@nrep.ug',
+};
 
 function avg(values: (number | null)[]): number | null {
   const valid = values.filter((v): v is number => v != null);
@@ -31,14 +28,14 @@ function avg(values: (number | null)[]): number | null {
 }
 
 function ScorePill({ score }: { score: number }) {
-  const band   = getProgressBand(score);
+  const band = getProgressBand(score);
   const colors = getBandColors(band);
   return (
     <div className="space-y-1.5">
       <div className="flex items-baseline gap-1">
         <span className="text-3xl font-bold" style={{ color: colors.badge }}>{score}</span>
         {score <= 100
-          ? <span className="text-sm text-gray-400 font-mono">/100</span>
+          ? <span className="text-sm text-gray-400">/100</span>
           : <span className="text-sm font-bold" style={{ color: colors.badge }}>⭐</span>}
       </div>
       <span className="inline-block rounded-full px-2.5 py-0.5 text-xs font-bold"
@@ -46,29 +43,36 @@ function ScorePill({ score }: { score: number }) {
         {BAND_LABELS[band]}
       </span>
       <div className="h-1.5 w-full rounded-full bg-gray-100 overflow-hidden">
-        <div className="h-1.5 rounded-full transition-all duration-500"
-          style={{ width: `${getBarWidth(score)}%`, backgroundColor: colors.bar }} />
+        <div className="h-1.5 rounded-full" style={{ width: `${getBarWidth(score)}%`, backgroundColor: colors.bar }} />
       </div>
     </div>
   );
 }
 
 export function MultiRaterScore({ targetId, target, scoreUser, scoreAdmin, scoreSuperAdmin, profile, onUpdated }: Props) {
-  const [saving,  setSaving]  = useState(false);
-  const [error,   setError]   = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [editing, setEditing] = useState<string | null>(null);
-  const [draft,   setDraft]   = useState('');
+  const [draft, setDraft] = useState('');
 
-  const memberCanScore      = canGiveMemberScore(profile, target);
-  const sectionAdminCanScore = canScoreTarget(profile, target);
-  // Dr. Mukisa (super_admin or system admin with no sections) can give overall score
-  const overallAdminCanScore = isAdmin(profile) && (!profile?.sectionSlugs || profile.sectionSlugs.length === 0);
+  const resultCode = (target as any).resultCode ?? '';
+  const sectionAdminEmail = RESULT_SECTION_ADMINS[resultCode] ?? '';
+  const sectionAdminName = resultCode === 'R1' || resultCode === 'R3' ? 'M. Kizza'
+    : resultCode === 'R2' || resultCode === 'R6' ? 'E. Nabaho'
+    : resultCode === 'R4' || resultCode === 'R5' ? 'P. Nduhuura'
+    : 'Section admin';
 
-  const resultCode       = (target as any).resultCode ?? '';
-  const sectionAdminName = getSectionAdminName(resultCode);
+  // Permission checks based on email and role
+  const userEmail = profile?.email ?? '';
+  const role = profile?.role ?? '';
+  const hasSections = (profile?.sectionSlugs?.length ?? 0) > 0;
 
-  const finalScore  = avg([scoreUser, scoreAdmin, scoreSuperAdmin]);
-  const finalBand   = finalScore != null ? getProgressBand(finalScore) : null;
+  const memberCanScore = role === 'member' && target.assignedUserIds?.includes(profile?.userId ?? '');
+  const sectionAdminCanScore = role === 'admin' && hasSections && userEmail === sectionAdminEmail;
+  const overallAdminCanScore = role === 'admin' && !hasSections; // Dr. Mukisa
+
+  const finalScore = avg([scoreUser, scoreAdmin, scoreSuperAdmin]);
+  const finalBand = finalScore != null ? getProgressBand(finalScore) : null;
   const finalColors = finalBand ? getBandColors(finalBand) : null;
 
   async function save(field: string, value: number) {
@@ -89,35 +93,13 @@ export function MultiRaterScore({ targetId, target, scoreUser, scoreAdmin, score
   }
 
   const slots = [
-    {
-      field:     'scoreUser',
-      label:     'Member score',
-      sublabel:  'Entered by the assigned member',
-      value:     scoreUser,
-      canEdit:   memberCanScore,
-      noEditMsg: 'Only the assigned member can enter this score',
-    },
-    {
-      field:     'scoreAdmin',
-      label:     `Section admin score`,
-      sublabel:  `Assessed by ${sectionAdminName}`,
-      value:     scoreAdmin,
-      canEdit:   sectionAdminCanScore,
-      noEditMsg: `Only ${sectionAdminName} can enter this score`,
-    },
-    {
-      field:     'scoreSuperAdmin',
-      label:     'Overall admin score',
-      sublabel:  'Assessed by Dr. Nicholas Mukisa',
-      value:     scoreSuperAdmin,
-      canEdit:   overallAdminCanScore,
-      noEditMsg: 'Only Dr. Mukisa can enter this score',
-    },
+    { field: 'scoreUser', label: 'Member score', sublabel: 'Entered by the assigned member', value: scoreUser, canEdit: memberCanScore, noEditMsg: 'Only the assigned member can enter this score' },
+    { field: 'scoreAdmin', label: 'Section admin score', sublabel: `Assessed by ${sectionAdminName}`, value: scoreAdmin, canEdit: sectionAdminCanScore, noEditMsg: `Only ${sectionAdminName} can enter this score` },
+    { field: 'scoreSuperAdmin', label: 'Overall admin score', sublabel: 'Assessed by Dr. Nicholas Mukisa', value: scoreSuperAdmin, canEdit: overallAdminCanScore, noEditMsg: 'Only Dr. Mukisa can enter this score' },
   ];
 
   return (
     <div className="overflow-hidden rounded-lg border-2 bg-white" style={{ borderColor: '#054653' }}>
-      {/* Header */}
       <div className="flex items-center justify-between px-5 py-3" style={{ backgroundColor: '#054653' }}>
         <p className="text-base font-bold text-white">Performance Assessment</p>
         {finalScore != null && finalColors && (
@@ -132,18 +114,15 @@ export function MultiRaterScore({ targetId, target, scoreUser, scoreAdmin, score
         )}
       </div>
 
-      {/* 3 score columns */}
       <div className="grid grid-cols-1 divide-y sm:grid-cols-3 sm:divide-x sm:divide-y-0 divide-gray-100">
         {slots.map((slot) => {
           const isEditing = editing === slot.field;
-          const hasScore  = slot.value != null;
-          const draftNum  = Number(draft);
-
+          const hasScore = slot.value != null;
+          const draftNum = Number(draft);
           return (
             <div key={slot.field} className="p-4">
               <p className="text-sm font-bold text-gray-800">{slot.label}</p>
               <p className="text-xs text-gray-400 mb-3">{slot.sublabel}</p>
-
               {isEditing ? (
                 <div className="space-y-2">
                   <input type="number" min={0} value={draft}
@@ -163,21 +142,16 @@ export function MultiRaterScore({ targetId, target, scoreUser, scoreAdmin, score
                       {saving ? 'Saving…' : 'Save'}
                     </button>
                     <button onClick={() => setEditing(null)}
-                      className="rounded-lg border px-3 py-2 text-sm text-gray-500">
-                      Cancel
-                    </button>
+                      className="rounded-lg border px-3 py-2 text-sm text-gray-500">Cancel</button>
                   </div>
                 </div>
               ) : (
                 <div>
-                  {hasScore
-                    ? <ScorePill score={slot.value!} />
-                    : <p className="text-sm italic text-gray-300 mb-3">Not scored yet</p>}
+                  {hasScore ? <ScorePill score={slot.value!} /> : <p className="text-sm italic text-gray-300 mb-3">Not scored yet</p>}
                   <div className="mt-3">
                     {slot.canEdit ? (
-                      <button
-                        onClick={() => { setEditing(slot.field); setDraft(String(slot.value ?? '')); }}
-                        className="w-full rounded-lg py-2 text-sm font-bold text-white"
+                      <button onClick={() => { setEditing(slot.field); setDraft(String(slot.value ?? '')); }}
+                        className="w-full rounded-lg py-2.5 text-sm font-bold text-white"
                         style={{ backgroundColor: hasScore ? '#054653' : '#D98E2B' }}>
                         {hasScore ? '✏ Update score' : '＋ Add score'}
                       </button>
@@ -192,16 +166,12 @@ export function MultiRaterScore({ targetId, target, scoreUser, scoreAdmin, score
         })}
       </div>
 
-      {/* Legend + computation */}
       <div className="border-t border-gray-100 px-5 py-3" style={{ backgroundColor: '#F8FAFB' }}>
         <div className="flex flex-wrap gap-x-4 gap-y-1 mb-1">
           {([
-            { band: 'very_poor',   color: '#DC2626' },
-            { band: 'poor',        color: '#EA580C' },
-            { band: 'fair',        color: '#D97706' },
-            { band: 'good',        color: '#059669' },
-            { band: 'very_good',   color: '#054653' },
-            { band: 'exceptional', color: '#D98E2B' },
+            { band: 'very_poor', color: '#DC2626' }, { band: 'poor', color: '#EA580C' },
+            { band: 'fair', color: '#D97706' }, { band: 'good', color: '#059669' },
+            { band: 'very_good', color: '#054653' }, { band: 'exceptional', color: '#D98E2B' },
           ] as const).map(({ band, color }) => (
             <span key={band} className="flex items-center gap-1 text-xs">
               <span className="h-2 w-2 rounded-full" style={{ backgroundColor: color }} />
@@ -210,12 +180,8 @@ export function MultiRaterScore({ targetId, target, scoreUser, scoreAdmin, score
           ))}
         </div>
         {finalScore != null && (
-          <p className="text-xs text-gray-400">
-            Final = ({[
-              scoreUser != null ? `${scoreUser}` : null,
-              scoreAdmin != null ? `${scoreAdmin}` : null,
-              scoreSuperAdmin != null ? `${scoreSuperAdmin}` : null,
-            ].filter(Boolean).join(' + ')})
+          <p className="text-xs text-gray-400 mt-1">
+            Final = ({[scoreUser != null ? `${scoreUser}` : null, scoreAdmin != null ? `${scoreAdmin}` : null, scoreSuperAdmin != null ? `${scoreSuperAdmin}` : null].filter(Boolean).join(' + ')})
             {' ÷ '}{[scoreUser, scoreAdmin, scoreSuperAdmin].filter(v => v != null).length}
             {' = '}<strong style={{ color: '#054653' }}>{finalScore}{finalScore > 100 ? ' ⭐' : '/100'}</strong>
           </p>
