@@ -36,6 +36,7 @@ function DashboardPageInner() {
     // System admin sees ALL targets
     if (isSystemAdmin) return data.targets;
     // Everyone else: ONLY targets where they are personally assigned
+    // Fixed: use assignedUserIds not sectionSlugs
     return data.targets.filter((t) => t.assignedUserIds.includes(profile.userId));
   }, [data, profile, isSystemAdmin]);
 

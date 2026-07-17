@@ -1,84 +1,83 @@
 import type { Profile, TargetDoc } from '@/types';
 
-/** Super admin only — Dr. Nicholas. Sees everything, manages all users */
+// Maps result codes to section admin emails
+const RESULT_ADMIN_MAP: Record<string, string[]> = {
+  'R1': ['mkizza@nrep.ug'],
+  'R3': ['mkizza@nrep.ug'],
+  'R2': ['enabaho@nrep.ug'],
+  'R6': ['enabaho@nrep.ug'],
+  'R4': ['pnduhuura@nrep.ug'],
+  'R5': ['pnduhuura@nrep.ug'],
+};
+
 export function isSuperAdmin(profile: Profile | null): boolean {
   return !!profile && profile.role === 'super_admin' && profile.status === 'approved';
 }
 
-/** Section admins — Kizza (R1&R3), Nabaho (R2&R6), Nduhuura (R4&R5)
- *  They have role=admin AND have sections assigned */
+export function isAdmin(profile: Profile | null): boolean {
+  return !!profile && (profile.role === 'admin' || profile.role === 'super_admin') && profile.status === 'approved';
+}
+
+// System admin = admin with no sections (Dr. Mukisa, Derrick)
+export function isSystemAdmin(profile: Profile | null): boolean {
+  return isAdmin(profile) && (!profile?.sectionSlugs || profile.sectionSlugs.length === 0);
+}
+
+// Section admin = admin WITH sections (Kizza, Nabaho, Nduhuura)
 export function isSectionAdmin(profile: Profile | null, target?: TargetDoc): boolean {
   if (!profile || profile.status !== 'approved') return false;
   if (profile.role !== 'admin') return false;
   if (!profile.sectionSlugs || profile.sectionSlugs.length === 0) return false;
-  if (target) return profile.sectionSlugs.includes(target.sectionSlug);
   return true;
 }
 
-/** Any admin (super_admin or section admin) */
-export function isAdmin(profile: Profile | null): boolean {
-  return !!profile &&
-    (profile.role === 'admin' || profile.role === 'super_admin') &&
-    profile.status === 'approved';
-}
-
-/** Only super_admin can access the full Admin panel (user management) */
 export function canAccessAdminPanel(profile: Profile | null): boolean {
-  return isSuperAdmin(profile);
+  return isAdmin(profile);
 }
 
-/** Section admins + super_admin can access review queue */
 export function canAccessReviewQueue(profile: Profile | null): boolean {
   return isAdmin(profile) || profile?.role === 'analyst';
 }
 
-/** Can edit a target's progress */
 export function canEditTarget(profile: Profile | null, target: TargetDoc): boolean {
   if (!profile || profile.status !== 'approved') return false;
-  if (isSuperAdmin(profile)) return true;
-  if (isSectionAdmin(profile, target)) return true;
+  if (isAdmin(profile)) return true;
   if (profile.role === 'member') {
-    return (
-      profile.sectionSlugs.includes(target.sectionSlug) ||
-      target.assignedUserIds.includes(profile.userId)
-    );
+    return target.assignedUserIds.includes(profile.userId);
   }
   return target.assignedUserIds.includes(profile.userId);
 }
 
-/** Can comment and upload on a target */
 export function canContributeToTarget(profile: Profile | null, target: TargetDoc): boolean {
   if (!profile || profile.status !== 'approved') return false;
   if (isAdmin(profile)) return true;
   if (profile.role === 'analyst') return true;
-  if (profile.role === 'member') {
-    return (
-      profile.sectionSlugs.includes(target.sectionSlug) ||
-      target.assignedUserIds.includes(profile.userId)
-    );
-  }
   return target.assignedUserIds.includes(profile.userId);
 }
 
-/** Can review and approve/reject pending updates */
 export function canReviewUpdates(profile: Profile | null): boolean {
   if (!profile || profile.status !== 'approved') return false;
   return isAdmin(profile) || profile.role === 'analyst';
 }
 
-/** Can give the section admin score on a target (0–20) */
-export function canScoreTarget(profile: Profile | null, target?: TargetDoc): boolean {
-  if (!target) return false;
-  return isSectionAdmin(profile, target);
+// Section admin can score targets in their result areas
+export function canScoreTarget(profile: Profile | null, target: TargetDoc, resultCode?: string): boolean {
+  if (!profile || profile.status !== 'approved') return false;
+  if (profile.role !== 'admin') return false;
+  if (!profile.sectionSlugs || profile.sectionSlugs.length === 0) return false;
+  if (!resultCode) return true; // fallback
+  const admins = RESULT_ADMIN_MAP[resultCode] ?? [];
+  return admins.includes(profile.email);
 }
 
-/** Can give the member score on a target (0–20) */
+// Member can score their own targets
 export function canGiveMemberScore(profile: Profile | null, target?: TargetDoc): boolean {
-  if (!target) return false;
   if (!profile || profile.status !== 'approved') return false;
-  return (
-    profile.role === 'member' &&
-    (profile.sectionSlugs.includes(target.sectionSlug) ||
-      target.assignedUserIds.includes(profile.userId))
-  );
+  if (!target) return false;
+  return profile.role === 'member' && target.assignedUserIds.includes(profile.userId);
+}
+
+// Dr. Mukisa (system admin) gives overall score
+export function canGiveOverallScore(profile: Profile | null): boolean {
+  return isSystemAdmin(profile);
 }
