@@ -2,55 +2,74 @@ import { NextResponse } from 'next/server';
 import { getAdminClient } from '@/lib/appwrite/server';
 import { DATABASE_ID, COLLECTIONS } from '@/lib/appwrite/config';
 import { requireUser, requireApproved, ApiAuthError } from '@/lib/api-auth';
+import { notifyReviewDecision } from '@/lib/email';
+import type { PendingUpdateDoc } from '@/types';
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+interface Body {
+  decision: 'approved' | 'rejected';
+  reviewNote?: string;
+}
+
+export async function PATCH(req: Request, { params }: { params: { updateId: string } }) {
   try {
     const { profile, userId, name } = await requireUser(req);
     requireApproved(profile);
-    const { databases } = getAdminClient();
-    const body = await req.json();
-    const { action, stage, note } = body;
-    const now = new Date().toISOString();
 
-    const update: Record<string, unknown> = {};
-
-    if (stage === 'section') {
-      // Section admin — stage 1
-      if (profile.role !== 'admin' || !profile.sectionSlugs?.length) {
-        throw new ApiAuthError('Only section admins can action stage 1.', 403);
-      }
-      update.reviewStatus   = action === 'approve' ? 'approved' : 'rejected';
-      update.reviewedBy     = userId;
-      update.reviewedByName = name;
-      update.reviewedAt     = now;
-      update.reviewNote     = note ?? null;
-
-      // If approved at stage 1, apply progress to target
-      if (action === 'approve') {
-        const pending = await databases.getDocument(DATABASE_ID, COLLECTIONS.PENDING_UPDATES, params.id);
-        await databases.updateDocument(DATABASE_ID, COLLECTIONS.TARGETS, pending.targetId, {
-          progressPercent: pending.proposedProgressPercent,
-          status:          pending.proposedStatus,
-          updatedAt:       now,
-          updatedBy:       userId,
-        });
-      }
-    } else if (stage === 'mukisa') {
-      // Dr. Mukisa — stage 2 (final)
-      if (profile.email !== 'mukisanic@nrep.ug') {
-        throw new ApiAuthError('Only Dr. Mukisa can action stage 2.', 403);
-      }
-      update.mukisaStatus = action === 'approve' ? 'approved' : 'rejected';
-      update.mukisaNote   = note ?? null;
-      update.mukisaAt     = now;
-    } else {
-      throw new ApiAuthError('Invalid stage.', 400);
+    if (profile.role !== 'admin' && profile.role !== 'analyst') {
+      throw new ApiAuthError('Only admins and analysts can review updates.', 403);
     }
 
-    const updated = await databases.updateDocument(
-      DATABASE_ID, COLLECTIONS.PENDING_UPDATES, params.id, update
+    const body: Body = await req.json();
+    if (!body.decision || !['approved', 'rejected'].includes(body.decision)) {
+      throw new ApiAuthError('decision must be "approved" or "rejected".', 400);
+    }
+
+    const { databases } = getAdminClient();
+    const update = (await databases.getDocument(
+      DATABASE_ID, COLLECTIONS.PENDING_UPDATES, params.updateId
+    )) as unknown as PendingUpdateDoc;
+
+    if (update.reviewStatus !== 'pending') {
+      throw new ApiAuthError('This update has already been reviewed.', 409);
+    }
+
+    const now = new Date().toISOString();
+
+    // Apply to the target if approved.
+    if (body.decision === 'approved') {
+      await databases.updateDocument(DATABASE_ID, COLLECTIONS.TARGETS, update.targetId, {
+        progressPercent: update.proposedProgressPercent,
+        status: update.proposedStatus,
+        updatedAt: now,
+        updatedBy: userId,
+      });
+    }
+
+    // Record the review decision.
+    const reviewed = await databases.updateDocument(
+      DATABASE_ID, COLLECTIONS.PENDING_UPDATES, params.updateId,
+      {
+        reviewStatus: body.decision,
+        reviewedBy: userId,
+        reviewedByName: name,
+        reviewedAt: now,
+        reviewNote: body.reviewNote?.trim() || null,
+      }
     );
-    return NextResponse.json({ update: updated });
+
+    // Notify the submitter of the decision.
+    notifyReviewDecision({
+      submittedByUserId: update.submittedBy,
+      submittedByName: update.submittedByName,
+      targetDescription: update.targetDescription,
+      decision: body.decision,
+      reviewedByName: name,
+      reviewNote: body.reviewNote?.trim() || null,
+      proposedProgressPercent: update.proposedProgressPercent,
+      proposedStatus: update.proposedStatus,
+    });
+
+    return NextResponse.json({ update: reviewed });
   } catch (err) {
     if (err instanceof ApiAuthError) return NextResponse.json({ error: err.message }, { status: err.status });
     console.error(err);
