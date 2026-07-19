@@ -90,7 +90,7 @@ export function ReviewPipeline({
       <div className="divide-y" style={{ divideColor: '#E5E7EB' }}>
         {updates.map((u) => {
           const s1 = STATUS_STYLES[u.reviewStatus] ?? STATUS_STYLES.pending;
-          const s2 = STATUS_STYLES[u.mukisaStatus ?? 'pending'];
+          const s2 = STATUS_STYLES[(u.mukisaStatus as keyof typeof STATUS_STYLES) ?? 'pending'] ?? STATUS_STYLES.pending;
 
           return (
             <div key={u.$id} className="p-4">
