@@ -87,7 +87,7 @@ export function ReviewPipeline({
         <p className="text-xs text-gray-400">Two-stage approval: Section admin → Dr. Mukisa</p>
       </div>
 
-      <div className="divide-y" style={{ divideColor: '#E5E7EB' }}>
+      <div className="divide-y" className="divide-gray-200">
         {updates.map((u) => {
           const s1 = STATUS_STYLES[u.reviewStatus] ?? STATUS_STYLES.pending;
           const s2 = STATUS_STYLES[(u.mukisaStatus as keyof typeof STATUS_STYLES) ?? 'pending'] ?? STATUS_STYLES.pending;
